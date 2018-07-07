@@ -1,6 +1,5 @@
 import {
 	fetchPlots,
-	FETCH_PLOTS,
 	FETCH_PLOTS_REQUEST,
 	FETCH_PLOTS_SUCCESS,
 	FETCH_PLOTS_ERROR
@@ -26,10 +25,6 @@ const initialState = {
 }
 
 export default function gardenReducer(state=initialState, action) {
-	// if(action.type === FETCH_PLOTS) {
-	// 	return this.gardenReducer(state, {
-	// 		type: FETCH_PLOTS_REQUEST
-	// 	});
 	if(action.type === FETCH_PLOTS_REQUEST) {
 		return Object.assign({}, state, {
 			error: null,

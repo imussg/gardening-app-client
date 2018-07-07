@@ -1,7 +1,5 @@
 // import const { BASE_URL } from '../config';
 
-export const FETCH_PLOTS = 'FETCH_PLOTS';
-
 export const fetchPlots = () => dispatch => (
 	dispatch(fetchPlotsRequest()))
 		// .then(() => fetch(`${BASE_URL}/api/plots`, {
