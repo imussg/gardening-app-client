@@ -1,5 +1,93 @@
 body {
-  margin: 0;
+  margin: 10;
   padding: 0;
   font-family: sans-serif;
 }
+
+.container {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+}
+
+.col-1 {
+	grid-column: span 1;
+}
+
+.col-2 {
+	grid-column: span 2;
+}
+
+.col-3 {
+	grid-column: span 3;
+}
+
+.col-4 {
+	grid-column: span 4;
+}
+
+.col-5 {
+	grid-column: span 5;
+}
+
+.col-6 {
+	grid-column: span 6;
+}
+
+.col-7 {
+	grid-column: span 7;
+}
+
+.col-8 {
+	grid-column: span 8;
+}
+
+.col-9 {
+	grid-column: span 9;
+}
+
+.col-10 {
+	grid-column: span 10;
+}
+
+.col-11 {
+	grid-column: span 11;
+}
+
+.col-12 {
+	grid-column: span 12;
+}
+
+.flex-g/*rid {
+	display: flex;
+	flex: 1;
+	justify-content: space-between;
+}*/
+
+/* For mobile, b/c all CSS qualifiers from here are desktop sizes */
+/*[class*="col-"] {
+	width: 100%;
+}*/
+/* For Desktops */
+@media only screen and (min-width: 768px) {
+	/*.col-2 {
+		width: 45%;
+	}
+
+	.col-3 {
+		width: 32%;
+	}
+
+	.col-4 {
+		width: 22.5%;
+	}*/
+}
+
+@media only screen and (min-width: 1024px) {
+	
+}
+
+/*@media (max-width: 400px) {
+	.flex-grid {
+		display: block;
+	}
+}*/

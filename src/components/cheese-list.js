@@ -30,9 +30,9 @@ export class CheeseList extends React.Component {
 			return <strong>{this.props.error}</strong>;
 		}
 
-		const cheeses = this.props.cheeses.map((cheese, index) => (
+		const cheeses = this.props.cheeses ? this.props.cheeses.map((cheese, index) => (
 			<li key={"ch"+index}>{cheese}</li>
-		));
+		)) : '';
 		return <ul className="cheese-search-results">{cheeses}</ul>;
 	}
 

@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import reducer from './reducers/cheese';
+import gardenReducer from './reducers/garden';
 
 export default createStore(
-	reducer,
+	gardenReducer,
 	applyMiddleware(thunk)
 );
