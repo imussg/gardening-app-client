@@ -1,9 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
-import { fetchPlots } from '../actions/garden';
+
+import Plot from './plot';
+import { plotClick, editPlot, createPlot } from '../actions/garden';
+
 
 export class Garden extends React.Component {
+
+	onPlotClick(plotId) {
+		const clickedPlot = this.props.garden.plots.filter(plot => (plot.id === plotId))[0];
+		this.props.dispatch(plotClick(clickedPlot));
+	}
+
+	editPlot(data) {
+		this.props.dispatch(editPlot(this.props.plotFocus));
+	}
+
+	newPlot(event) {
+		this.props.dispatch(createPlot(this.props.plotFocus));
+	}
 
 	render() {
 		if(this.props.loading) {
@@ -13,36 +29,63 @@ export class Garden extends React.Component {
 		if(this.props.error) {
 			return <strong>{this.props.error}</strong>;
 		}
-/*
-<Plot name={plot.name} veggies={plot.veggies} />
-...
-<Plot name={plot.name} .... />
-*/
-		const plots = this.props.plots ? this.props.plots.map(plot => {
-			const veggies = plot.veggies ? plot.veggies.map(veggie => {
-				return (<div className="flex-grid">
-				<li className={veggie.name}>
-					<h1 className={`${veggie.name}-title`}>{veggie.name}</h1>
-					<img src={veggie.picture.src} alt={veggie.picture.alt} />
-					<span className={`${veggie.name}-condition`}>{veggie.condition}</span>
-				</li>
-				</div>);
-			}) : "";
-			const plotHtml = (<container className={plot.name}>
-				<h1 className={`${plot.name}-title`}>{plot.name}</h1>
-				<ul className="veggies-list">{veggies}</ul>
-			</container>);
-			return plotHtml;
-		}) : "";
-		return <section className="plots-list">{plots}</section>;
+		const plots = this.props.garden.plots.map(plot => {
+			return (<Plot
+				plot={plot}
+				expanded={false}
+				onPlotClick={plotId => this.onPlotClick(plotId)},
+				toggleEditPlot={event => this.toggleEditPlot(event)},
+				key={plot.id}
+			/>);
+		});
+		let focusedPlotJsx = this.props.plotFocus ? this.generatePlot(this.props.plotFocus) : '';
+
+		return (<div className="garden-plots">
+			<div className="row plots">{plots}</div>
+			<div className="row">
+				<div className="col-2 new-plot">
+					<button onClick={event=>this.newPlot(event)} id="new-plot" type="button">New Plot</button>
+				</div>
+				<div className="col-2 focused-plot">
+					{focusedPlotJsx}
+				</div>
+				<div className="col-2 edit-plot">
+					<button onClick={event=>this.editPlot(event)} className="edit-plot" id={this.props.plotFocus ? this.props.plotFocus.id : "edit-plot"} type="button">New Plot</button>
+				</div>
+			</div>
+		</div>
+		);
 	}
+
+	generatePlot(plot) {
+		if(this.props.editPlot) {
+			return (<PlotForm
+				plot={plot}
+				formType={"edit"}
+				onSubmit={data => this.editPlot(data)}
+			/>);
+		} else if(this.props.newPlot) {
+
+		}
+		return (<Plot
+			plot={plot}
+			expanded={true}
+			onPlotClick={plotId => this.onPlotClick(plotId)}
+			key={plot.id}
+		/>);
+	}
+
 }
 
 const mapStateToProps = state => ({
-	loading: state.loading,
+	hasSubmittedGarden: state.hasSubmittedGarden,
 	// the plot which is being focused on and hence has its details shown
-	focus: state.focus,
-	plots: [...state.plots]
+	plotFocus: state.plotFocus,
+	garden: state.garden,
+	newPlot: state.newPlot,
+	editPlot: state.editPlot,
+	error: state.error
+	// plots: [...state.plots]
 });
 
 export default connect(mapStateToProps)(Garden);

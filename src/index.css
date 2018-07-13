@@ -1,93 +1,200 @@
+/*body {
+  font-family: "source-sans-pro","Lato",sans-serif;
+  font-size: 0;
+}*/
+
 body {
   margin: 10;
   padding: 0;
   font-family: sans-serif;
 }
 
-.container {
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
+* {
+  box-sizing: border-box;
+}
+.row {
+  max-width: 1000px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.col-1 {
-	grid-column: span 1;
+/* Clearfix */
+.row::before,
+.row::after {
+  display: table;
+  content: '';
 }
 
-.col-2 {
-	grid-column: span 2;
+.row::after {
+  clear: both;
 }
 
-.col-3 {
-	grid-column: span 3;
+.col-3, .col-4, .col-6, .col-12 {
+  float: left;
+
+  /* Gutters:
+   * Each column is padded by half-a-gutter on each side,
+   *
+   * Half a gutter is 10px, 10/960 (context) = 1.041666%
+   *
+   */
+  padding-left: 1.04166666%;
+  padding-right: 1.04166666%;
 }
 
-.col-4 {
-	grid-column: span 4;
+#root {
+  background-color: #f2fff2;
 }
 
-.col-5 {
-	grid-column: span 5;
+#root > .row {
+  background-color: #d0ffd0;
+  border: 1px solid green;
 }
 
-.col-6 {
-	grid-column: span 6;
+form.garden-name-form {
+  background-color: #85e39a;
+  border-radius: 10px;
+  padding: 10px;
 }
 
-.col-7 {
-	grid-column: span 7;
+h1 {
+  font-size: 32px;
+  
+}
+figcaption {
+  text-align: left;
+  font-size: 15px;
+  padding: 0px 5px 5px 5px;
+  /*border: 1px solid gray;*/
+  background-color: #85e39a;
+}
+figcaption p {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-top: 5px;
+}
+p.caption-name {
+  font-weight: bold;
 }
 
-.col-8 {
-	grid-column: span 8;
+/* Mobile defaults */
+.col-3, .col-4, .col-6, .col-12 {
+  width: 100%;
+}
+img {
+  width: 100%;
+  height: 100%;
+  min-height: 175px;
+  border: 1px solid lightgrey;
+}
+form {
+  margin: 10px;
 }
 
-.col-9 {
-	grid-column: span 9;
+input {
+  margin: 5px;
+  padding: 5px;
+  font-size: 15px;
 }
 
-.col-10 {
-	grid-column: span 10;
+button {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid;
+  font-size: 15px;
 }
 
-.col-11 {
-	grid-column: span 11;
+button.blue, button.veggie-edit {
+  color: white;
+  background-color: #00b0e6;
+  border-color: #00b0e6;
 }
 
-.col-12 {
-	grid-column: span 12;
+button.green {
+  color: white;
+  background-color: green;
+  border-color: green;
 }
 
-.flex-g/*rid {
-	display: flex;
-	flex: 1;
-	justify-content: space-between;
+button.veggie-delete {
+  color: white;
+  background-color: red;
+  border-color: red;
+}
+
+button#submit-garden-name {
+  float: left;
+}
+
+button#add-new-garden {
+  float: right;
+}
+
+.veggie-description {
+  margin-left: 15px;
+}
+
+.expanded-plot {
+  border-top: 2px solid gray;
+}
+
+.expanded-plot > .row {
+  padding-bottom: 0px;
+  margin-bottom: 10px;
+}
+
+.expanded-plot > .col-3 {
+  padding: 0px;
+  margin-top: 30px;
+}
+
+.veggie-name {
+  font-weight: bold;
+}
+.veggie-condition, .veggie-created {
+  font-size: 15px;
+}
+
+.veggie-info-container {
+  height: 215px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/*.veggies-row {
+  margin-left: 0px;
+  margin-right: 0px;
 }*/
 
-/* For mobile, b/c all CSS qualifiers from here are desktop sizes */
-/*[class*="col-"] {
-	width: 100%;
-}*/
-/* For Desktops */
-@media only screen and (min-width: 768px) {
-	/*.col-2 {
-		width: 45%;
-	}
-
-	.col-3 {
-		width: 32%;
-	}
-
-	.col-4 {
-		width: 22.5%;
-	}*/
+.veg-edit-wrap {
+  text-align: left;
 }
 
-@media only screen and (min-width: 1024px) {
-	
+.veg-del-wrap {
+  text-align: right;
 }
 
-/*@media (max-width: 400px) {
-	.flex-grid {
-		display: block;
-	}
-}*/
+@media only screen and (min-width: 640px) {
+  .col-2 {
+    width: 16.66%;
+  }
+  .col-3 {
+    width: 25%;
+  }
+
+  .col-4 {
+    width: 33.33%;
+  }
+
+  .col-6 {
+    width: 50%;
+  }
+
+  .col-12 {
+    width: 100%;
+  }
+}
+
