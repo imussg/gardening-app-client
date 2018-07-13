@@ -1,5 +1,4 @@
 import {
-	fetchPlots,
 	FETCH_PLOTS_REQUEST,
 	FETCH_PLOTS_SUCCESS,
 	FETCH_PLOTS_ERROR,
@@ -7,7 +6,7 @@ import {
 	SUBMIT_GARDEN,
 	GARDEN_NAME_ERROR,
 	TOGGLE_GARDEN_BOOLEAN,
-	PLOT_CLICK,
+	FOCUS_PLOT,
 	EDIT_PLOT,
 	NEW_PLOT,
 	CREATE_PLOT_SUCCESS,
@@ -33,11 +32,13 @@ export default function gardenReducer(state=initialState, action) {
 		});
 	} else if(action.type === EDIT_PLOT) {
 		return Object.assign({}, state, {
-			editPlot: true
+			editPlot: true,
+			newPlot: false
 		});
 	} else if(action.type === NEW_PLOT) {
 		return Object.assign({}, state, {
 			newPlot: true,
+			editPlot: false
 		});
 	} else if(action.type === CREATE_PLOT_SUCCESS) {
 		return Object.assign({}, state, {
@@ -49,7 +50,6 @@ export default function gardenReducer(state=initialState, action) {
 		return Object.assign({}, state, {
 			error: action.error
 		});
-	}
 	} else if(action.type === TOGGLE_GARDEN_BOOLEAN) {
 		return Object.assign({}, state, {
 			hasSubmittedGarden: !state.hasSubmittedGarden
@@ -61,9 +61,9 @@ export default function gardenReducer(state=initialState, action) {
 			gardenName: "",
 			garden: {}
 		});
-	} else if(action.type === PLOT_CLICK) {
+	} else if(action.type === FOCUS_PLOT) {
 		return Object.assign({}, state, {
-			plotFocus: action.plot
+			plotFocus: action.plotFocus
 		});
 	} else if(action.type === FETCH_PLOTS_REQUEST) {
 		return Object.assign({}, state, {

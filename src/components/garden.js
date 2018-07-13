@@ -3,21 +3,24 @@ import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
 
 import Plot from './plot';
-import { plotClick, editPlot, createPlot } from '../actions/garden';
+import PlotForm from './forms/plot';
+import { focusPlot, editPlot, createPlot } from '../actions/garden';
 
 
 export class Garden extends React.Component {
 
 	onPlotClick(plotId) {
 		const clickedPlot = this.props.garden.plots.filter(plot => (plot.id === plotId))[0];
-		this.props.dispatch(plotClick(clickedPlot));
+		console.log(clickedPlot);
+		this.props.dispatch(focusPlot(clickedPlot));
+		console.log(this.props);
 	}
 
-	editPlot(data) {
+	editPlot() {
 		this.props.dispatch(editPlot(this.props.plotFocus));
 	}
 
-	newPlot(event) {
+	newPlot() {
 		this.props.dispatch(createPlot(this.props.plotFocus));
 	}
 
@@ -33,46 +36,60 @@ export class Garden extends React.Component {
 			return (<Plot
 				plot={plot}
 				expanded={false}
-				onPlotClick={plotId => this.onPlotClick(plotId)},
-				toggleEditPlot={event => this.toggleEditPlot(event)},
+				onPlotClick={plotId => this.onPlotClick(plotId)}
+				toggleEditPlot={event => this.editPlot(event)}
 				key={plot.id}
 			/>);
 		});
 		let focusedPlotJsx = this.props.plotFocus ? this.generatePlot(this.props.plotFocus) : '';
 
+		console.log(focusedPlotJsx);
 		return (<div className="garden-plots">
 			<div className="row plots">{plots}</div>
-			<div className="row">
-				<div className="col-2 new-plot">
-					<button onClick={event=>this.newPlot(event)} id="new-plot" type="button">New Plot</button>
-				</div>
-				<div className="col-2 focused-plot">
-					{focusedPlotJsx}
-				</div>
-				<div className="col-2 edit-plot">
-					<button onClick={event=>this.editPlot(event)} className="edit-plot" id={this.props.plotFocus ? this.props.plotFocus.id : "edit-plot"} type="button">New Plot</button>
-				</div>
+			{this.getFocusedPlotTitleJsx()}
+			<div className="row focused-plot-veggies">
+				{focusedPlotJsx}
 			</div>
 		</div>
 		);
 	}
+	// sees if "editPlot" is true, makes title a form if so, displays it as a "h1" if false
+	getFocusedPlotTitleJsx() {
+		if(this.props.plotFocus) {	
+			if(this.props.editPlot) {
+				return (<div className="row  focused-plot-title">
+					<PlotForm />
+				</div>);
+			}
+			return (<div className="row  focused-plot-title">
+				<div className="col-4 new-plot">
+					<button onClick={()=>this.newPlot()} id="new-plot" type="button">New Plot</button>
+				</div>
+				<div className="col-4 focused-plot-title">
+					{this.props.plotFocus.name}
+				</div>
+				<div className="col-4 edit-plot">
+					<button onClick={()=>this.editPlot()} className="edit-plot" id={this.props.plotFocus ? this.props.plotFocus.id : "edit-plot"} type="button">New Plot</button>
+				</div>
+			</div>);
+		}
+		return "";
+	}
 
 	generatePlot(plot) {
-		if(this.props.editPlot) {
-			return (<PlotForm
-				plot={plot}
-				formType={"edit"}
-				onSubmit={data => this.editPlot(data)}
-			/>);
-		} else if(this.props.newPlot) {
-
+		if(this.props.newPlot) {
+			return <PlotForm />;
 		}
-		return (<Plot
-			plot={plot}
-			expanded={true}
-			onPlotClick={plotId => this.onPlotClick(plotId)}
-			key={plot.id}
-		/>);
+		
+		// const plotForm = this.props.editPlot ? <PlotForm /> : noEditTitle;
+		return (<div className="expanded-plot">
+			<Plot
+				plot={plot}
+				expanded={true}
+				onPlotClick={plotId => this.onPlotClick(plotId)}
+				key={plot.id}
+			/>
+		</div>);
 	}
 
 }

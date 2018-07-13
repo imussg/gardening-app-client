@@ -10,8 +10,7 @@ export default class Plot extends React.Component {
 		this.state = {
 			expanded: props.expanded,
 			plot: props.plot,
-			onPlotClick: props.onPlotClick,
-			toggleEditPlot: props.toggleEditPlot
+			onPlotClick: props.onPlotClick
 		}
 	}
 
@@ -55,13 +54,8 @@ export default class Plot extends React.Component {
 				</div>
 			</div>);
 		});
-		return (<div className="expanded-plot">
-			<div className="row" onClick={event=>this.state.toggleEditPlot(event)}>
-				<h1 className="expanded-plot-title">{this.state.plot.name}</h1>
-			</div>
-			<div className="row veggies-row">
-				{veggies}
-			</div>
+		return (<div className="row veggies-row">
+			{veggies}
 		</div>);
 	}
 

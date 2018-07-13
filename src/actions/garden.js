@@ -46,7 +46,8 @@ export const createPlot = (plot) => dispatch => {
 	.catch(err => dispatch(createPlotError(err)));
 }
 
-export const editPlot = (plot) => dispatch => {
+export const sendEditPlot = (plot) => dispatch => {
+	console.log(plot);
 	return fetch(`${BASE_URL}/api/plots/${plot.id}`, {
 		method: 'PUT',
 		headers: {
@@ -116,16 +117,21 @@ export const fetchPlotsError = (err) => ({
 });
 
 /**	USER ACTIONS **/
-export const PLOT_CLICK = 'PLOT_CLICK';
-export const plotClick = (plotFocus) => ({
-	type: PLOT_CLICK,
+export const FOCUS_PLOT = 'FOCUS_PLOT';
+export const focusPlot = (plotFocus) => ({
+	type: FOCUS_PLOT,
 	plotFocus
 });
 
 export const EDIT_PLOT = 'EDIT_PLOT';
 export const editPlot = () => ({
 	type: EDIT_PLOT
-})
+});
+
+export const NEW_PLOT = 'NEW_PLOT';
+export const newPlot = () => ({
+	type: NEW_PLOT
+});
 
 // export const SET_PLOT_CLICK = 'SET_PLOT_CLICK';
 // export const setPlotClick = (plotId) => ({

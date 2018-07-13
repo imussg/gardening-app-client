@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Input from './input';
-import GardensearchForm from './gardensearch-form';
+import GardensearchForm from './forms/gardensearch';
 import Garden from './garden';
 
 import { findGarden } from '../actions/garden';
@@ -25,6 +25,8 @@ export class LandingPage extends React.Component {
 				<div className="row">
 					<div className="col-12">
 						<h1>Gardening App</h1>
+					</div>
+					<div className="col-12">
 						<GardensearchForm />
 					</div>
 			    </div>
@@ -34,6 +36,8 @@ export class LandingPage extends React.Component {
 				<div className="row">
 					<div className="col-12">
 						<h1>Gardening App</h1>
+					</div>
+					<div className="col-12">
 						<Garden />
 					</div>
 			    </div>
