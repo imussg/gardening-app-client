@@ -51,18 +51,25 @@ export const sendEditPlot = (plot) => dispatch => {
 	return fetch(`${BASE_URL}/api/plots/${plot.id}`, {
 		method: 'PUT',
 		headers: {
-			"Content-Types": "application/json"
+			"Content-Type": "application/json"
 		},
-		body: {
-			name: plot.name,
-			gardenId: plot.gardenId,
-			veggies: plot.veggies ? [...plot.veggies] : []
+		body: JSON.stringify(plot)
+	})
+	.then((res) => {
+		if(res.ok) {
+			return dispatch(editPlotSuccess(plot));
+		} else {
+			return Promise.reject("editing plot unsuccessful");
 		}
 	})
-	.then(res => res.json())
-	.then(plot => dispatch(createPlotSuccess(plot)))
 	.catch(err => dispatch(createPlotError(err)));
 }
+
+export const EDIT_PLOT_SUCCESS = 'EDIT_PLOT_SUCCESS';
+export const editPlotSuccess = (plot) => ({
+	type: EDIT_PLOT_SUCCESS,
+	plot
+});
 
 export const CREATE_PLOT_SUCCESS = 'CREATE_PLOT_SUCCESS';
 export const createPlotSuccess = (plot) => ({
@@ -132,9 +139,3 @@ export const NEW_PLOT = 'NEW_PLOT';
 export const newPlot = () => ({
 	type: NEW_PLOT
 });
-
-// export const SET_PLOT_CLICK = 'SET_PLOT_CLICK';
-// export const setPlotClick = (plotId) => ({
-// 	type: SET_PLOT_CLICK,
-// 	plotId
-// })

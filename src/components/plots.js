@@ -15,23 +15,22 @@ export class Plot extends React.Component {
 	}
 
 	createThumbnail() {
-		let thumbPic;
+		let thumbPics;
 		if(!isEmpty(this.state.plot.veggies)) {
-			const thumbVeggie = this.state.plot.veggies.filter(veggie => {
-				return veggie.pictureUrl !== "";
-			})[0];
-			thumbPic = {
-				url: thumbVeggie.pictureUrl,
-				alt: thumbVeggie.pictureAlt
-			};
+			const thumbVeggies = this.state.plot.veggies.filter((veggie, index)=>{
+				console.log(veggie.pictureUrl);
+				return veggie.pictureUrl !== "" && index < 6;
+			});
+			thumbPics = thumbVeggies ? thumbVeggies.map((veggie, index) => {
+				return (<div className="col-6">
+					<img src={veggie.pictureUrl} alt={veggie.pictureAlt} className="thumbnail-pic"/>
+				</div>);
+			}) : [""];
 		} else {
-			thumbPic = {
-				url: "",
-				alt: ""
-			};
+			thumbPics = [""];
 		}
 		return (<div class="col-3" id={this.state.plot.name}>
-			<img src={thumbPic.url} alt={thumbPic.alt} />
+			{...thumbPics}
 			<figcaption>
 				<p class="caption-name">{this.props.name}</p>
 				<p class="caption-veggies">{this.state.plot.veggies?this.state.plot.veggies.length:0} veggies</p>

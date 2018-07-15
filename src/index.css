@@ -11,6 +11,9 @@ body {
 
 * {
   box-sizing: border-box;
+  /*display: flex;*/
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .row {
   max-width: 1000px;
@@ -46,10 +49,13 @@ body {
 }
 
 #root {
-  background-color: #f2fff2;
+  background-image: url("https://cdn.wallpapersafari.com/70/83/irvVAd.jpg");
+  height: 100%;
+  z-index: -1;
 }
 
 #root > .row {
+  z-index:1;
   background-color: #d0ffd0;
   border: 1px solid green;
 }
@@ -90,6 +96,12 @@ img {
   min-height: 175px;
   border: 1px solid lightgrey;
 }
+
+img.thumbnail-pic {
+  max-height: 50%;
+  max-width: 50%;
+}
+
 form {
   margin: 10px;
 }
@@ -107,19 +119,19 @@ button {
   font-size: 15px;
 }
 
-button.blue, button.veggie-edit {
+button.blue, button.veggie-edit, .edit-plot-button, .submit-plot-name {
   color: white;
   background-color: #00b0e6;
   border-color: #00b0e6;
 }
 
-button.green {
+button.green, .new-plot-button {
   color: white;
   background-color: green;
   border-color: green;
 }
 
-button.veggie-delete {
+button.veggie-delete, .cancel-plot-name {
   color: white;
   background-color: red;
   border-color: red;
@@ -133,12 +145,43 @@ button#add-new-garden {
   float: right;
 }
 
+#plot-name, .focused-plot-title, .plot-name-input {
+  font-size: 32px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  max-height: 36px;
+  border: 0px;
+  padding: 0px;
+}
+
+.plot-name-input {
+  margin-top: 0px;
+  text-align: center;
+  font-size: 29px;
+}
+
+input#plot-name {
+  margin: 0px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.new-plot, .submit-plot {
+  text-align: left;
+}
+
+.edit-plot, .cancel-plot {
+  text-align: right;
+}
+
 .veggie-description {
   margin-left: 15px;
 }
 
 .expanded-plot {
   border-top: 2px solid gray;
+  padding-top: 40px;
 }
 
 .expanded-plot > .row {

@@ -11,9 +11,7 @@ export class Garden extends React.Component {
 
 	onPlotClick(plotId) {
 		const clickedPlot = this.props.garden.plots.filter(plot => (plot.id === plotId))[0];
-		console.log(clickedPlot);
 		this.props.dispatch(focusPlot(clickedPlot));
-		console.log(this.props);
 	}
 
 	editPlot() {
@@ -43,7 +41,6 @@ export class Garden extends React.Component {
 		});
 		let focusedPlotJsx = this.props.plotFocus ? this.generatePlot(this.props.plotFocus) : '';
 
-		console.log(focusedPlotJsx);
 		return (<div className="garden-plots">
 			<div className="row plots">{plots}</div>
 			{this.getFocusedPlotTitleJsx()}
@@ -63,13 +60,13 @@ export class Garden extends React.Component {
 			}
 			return (<div className="row  focused-plot-title">
 				<div className="col-4 new-plot">
-					<button onClick={()=>this.newPlot()} id="new-plot" type="button">New Plot</button>
+					<button onClick={()=>this.newPlot()} className="new-plot-button" type="button">New Plot</button>
 				</div>
 				<div className="col-4 focused-plot-title">
 					{this.props.plotFocus.name}
 				</div>
 				<div className="col-4 edit-plot">
-					<button onClick={()=>this.editPlot()} className="edit-plot" id={this.props.plotFocus ? this.props.plotFocus.id : "edit-plot"} type="button">New Plot</button>
+					<button onClick={()=>this.editPlot()} className="edit-plot-button" type="button">Edit Plot</button>
 				</div>
 			</div>);
 		}

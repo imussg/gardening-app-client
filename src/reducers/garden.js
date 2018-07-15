@@ -8,6 +8,7 @@ import {
 	TOGGLE_GARDEN_BOOLEAN,
 	FOCUS_PLOT,
 	EDIT_PLOT,
+	EDIT_PLOT_SUCCESS,
 	NEW_PLOT,
 	CREATE_PLOT_SUCCESS,
 	CREATE_PLOT_ERROR
@@ -32,9 +33,16 @@ export default function gardenReducer(state=initialState, action) {
 		});
 	} else if(action.type === EDIT_PLOT) {
 		return Object.assign({}, state, {
-			editPlot: true,
+			editPlot: !state.editPlot,
 			newPlot: false
 		});
+	} else if(action.type === EDIT_PLOT_SUCCESS) {
+		return Object.assign({}, state, {
+			plotFocus: action.plot,
+			editPlot: false,
+			newPlot: false,
+			error: ""
+		})
 	} else if(action.type === NEW_PLOT) {
 		return Object.assign({}, state, {
 			newPlot: true,
@@ -42,6 +50,7 @@ export default function gardenReducer(state=initialState, action) {
 		});
 	} else if(action.type === CREATE_PLOT_SUCCESS) {
 		return Object.assign({}, state, {
+			hasSubmittedGarden: true,
 			editPlot: false,
 			newPlot: false,
 			plotFocus: action.plot

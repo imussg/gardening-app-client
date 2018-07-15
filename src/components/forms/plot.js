@@ -2,44 +2,34 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 
-import { createPlot, sendEditPlot } from '../../actions/garden';
+import { createPlot, sendEditPlot, editPlot } from '../../actions/garden';
 
 export class PlotForm extends React.Component {
 
-	onEditSubmit() {
-		const editedPlot = Object.assign({}, this.props.plotFocus, {name: this.plotName});
+	onEditSubmit(event) {
+		event.preventDefault();
+		const newPlotName = this.plotName.value;
+		const editedPlot = {name: newPlotName, id: this.props.plotFocus.id};
 		this.props.dispatch(sendEditPlot(editedPlot));
 	}
-	onSubmit(event) {
-		event.preventDefault();
-		let plot;
-		if(this.props.newPlot) {
-			plot = {
-				name: this.plotName ? this.plotName.value.trim() : "",
-				gardenId: this.props.garden ? this.props.garden.id : null,
-				veggies: this.props.veggies ? [...this.props.veggies] : []
-			};
-			this.props.dispatch(createPlot);
-		} else if(this.props.editPlot) {
-			plot = {
-				id: this.props.plotFocus.id,
-				gardenId: this.props.plotFocus.gardenId,
-			}
-		}
+
+	onCancel(event) {
+		this.props.dispatch(editPlot());
 	}
 
 	render() {
 		if(this.props.editPlot) {
+			let name = this.props.plotFocus.name;
 			return (
-				<form className="edit-plot" onSubmit={() => this.onEditSubmit()} >
-					<div className="col-4">
+				<form className="edit-plot" onSubmit={(event) => this.onEditSubmit(event)} >
+					<div className="col-4 submit-plot">
 						<button type="submit" className="submit-plot-name">Submit</button>
 					</div>
-					<div className="col-4">
-						<input type="text" ref={input => this.plotName = input} id="plot-name" placeholder={this.props.plotFocus.name} />
+					<div className="col-4 plot-name-input">
+						<input type="text" ref={input => this.plotName = input} id="plot-name" name="plot-name" defaultValue={name+""} />
 					</div>
-					<div className="col-4">
-						<button type="button" className="cancel-plot-name">Cancel</button>
+					<div className="col-4 cancel-plot">
+						<button type="button" className="cancel-plot-name" onClick={event=>this.onCancel(event)}>Cancel</button>
 					</div>
 				</form>
 			);
