@@ -16,24 +16,17 @@ export class GardensearchForm extends React.Component {
 	render() {
 
 		let successMessage;
-  //       if (this.props.submitSucceeded) {
-  //           successMessage = (
-  //               <div className="message message-success">
-  //                   Message submitted successfully
-  //               </div>
-  //           );
-  //       }
+        let errorMessage = this.props.error ? (<div className="garden-error">
+        	{this.props.error}
+        </div>) : '';
+        if(!this.props.error && this.props.garden) {
+        	successMessage = (<div className="garden-success">
+        		{"Garden successfully loaded"}
+        	</div>);
+        }
 
-        let errorMessage = this.props.error ? this.props.error : '';
-  //       if (this.props.error) {
-  //           errorMessage = (
-  //               <div className="message message-error">{this.props.error}</div>
-  //           );
-  //       }
         return (
 			<form className="garden-name-form" onSubmit={event => this.onSubmit(event)}>
-	            {successMessage}
-	            {errorMessage}
 	            <label htmlFor="garden-name">Garden Name</label>
 	            <input type="text" ref={input => this.gardenName = input} id="garden-name" placeholder="enter name of garden"/>
 	            <div className="action-buttons row">
@@ -56,6 +49,7 @@ export class GardensearchForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
+	garden: state.garden,
 	error: state.error
 });
 

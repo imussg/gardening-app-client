@@ -94,12 +94,8 @@ img {
   width: 100%;
   height: 100%;
   min-height: 175px;
+  max-height: 175px;
   border: 1px solid lightgrey;
-}
-
-img.thumbnail-pic {
-  max-height: 50%;
-  max-width: 50%;
 }
 
 form {
@@ -125,7 +121,7 @@ button.blue, button.veggie-edit, .edit-plot-button, .submit-plot-name {
   border-color: #00b0e6;
 }
 
-button.green, .new-plot-button {
+button.green, .new-plot-button, .new-veggie-button{
   color: white;
   background-color: green;
   border-color: green;
@@ -207,17 +203,29 @@ input#plot-name {
   padding-bottom: 5px;
 }
 
-/*.veggies-row {
-  margin-left: 0px;
-  margin-right: 0px;
-}*/
-
 .veg-edit-wrap {
   text-align: left;
 }
 
 .veg-del-wrap {
   text-align: right;
+}
+
+.veggie-picture {
+  padding: 0px;
+}
+.plot-instructions, .edit-plot-instructions {
+  font-size: 17px;
+  color: red;
+}
+.plot-name-input {
+  text-align: center;
+}
+.garden-error {
+  color: red;
+}
+.garden-success {
+  color: green;
 }
 
 @media only screen and (min-width: 640px) {
@@ -241,3 +249,40 @@ input#plot-name {
   }
 }
 
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -1,5 +1,8 @@
 const { BASE_URL } = require('../config');
 
+/////////////////////////////////////////////
+////// SERVER API CALLS FOR GARDEN REQ //////
+/////////////////////////////////////////////
 export const fetchGarden = (id) => dispatch => {
 	// update state to reflect a request for a garden w/ given id
 	dispatch(fetchPlotsRequest());
@@ -21,14 +24,17 @@ export const findGarden = (name) => dispatch => {
 				return (garden.name.toLowerCase() === name.toLowerCase());
 			});
 			if(foundGarden[0]) {
-				dispatch(fetchGarden(foundGarden[0].id));
-				dispatch(toggleGardenBoolean());
+				// console.log(foundGarden[0]);
+				dispatch(fetchPlotsSuccess(foundGarden[0]));
+				// dispatch(toggleGardenBoolean());
 			}
 
 		})
 		.catch(err => dispatch(gardenNameError(err)));
 }
-
+/////////////////////////////////////////////
+////// SERVER API CALLS FOR PLOT REQ'S //////
+/////////////////////////////////////////////
 export const createPlot = (plot) => dispatch => {
 	return fetch(`${BASE_URL}/api/plots`, {
 		method: 'POST',
@@ -45,9 +51,8 @@ export const createPlot = (plot) => dispatch => {
 	.then(plot => dispatch(createPlotSuccess(plot)))
 	.catch(err => dispatch(createPlotError(err)));
 }
-
 export const sendEditPlot = (plot) => dispatch => {
-	console.log(plot);
+	// console.log(plot);
 	return fetch(`${BASE_URL}/api/plots/${plot.id}`, {
 		method: 'PUT',
 		headers: {
@@ -64,7 +69,78 @@ export const sendEditPlot = (plot) => dispatch => {
 	})
 	.catch(err => dispatch(createPlotError(err)));
 }
+/////////////////////////////////////////////
+////// SERVER API CALLS FOR VEGGIE REQ'S ////
+/////////////////////////////////////////////
+// export const fetchVeggie = (veggieId) => dispatch => {
+// 	return fetch(`${BASE_URL}/api/veggies/${veggieId}`, { method: 'GET' })
+// 		.then(veggie => dispatch(fetchVeggieSuccess(veggie)))
+// 		.catch(error => dispatch(fetchVeggie))
+// }
 
+export const sendEditVeggie = (veggie) => dispatch => {
+	return fetch(`${BASE_URL}/api/veggies/${veggie.id}`, {
+		method: 'PUT',
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(veggie)
+	})
+	.then((res) => {
+		if(res.ok) {
+			return dispatch(editVeggieSuccess(veggie));
+		} else {
+			return Promise.reject("editing veggie unsuccessful");
+		}
+	})
+	.catch(err => dispatch(editVeggieError(err)));
+};
+/////////////////////////////////////////////
+////////  GARDEN ACTIONS  ///////////////////
+/////////////////////////////////////////////
+export const TOGGLE_GARDEN_BOOLEAN = 'TOGGLE_GARDEN_BOOLEAN';
+export const toggleGardenBoolean = (res) => ({
+	type: TOGGLE_GARDEN_BOOLEAN
+});
+
+export const SUBMIT_GARDEN = 'SUBMIT_GARDEN';
+export const submitGarden = (res) => ({
+	type: SUBMIT_GARDEN,
+	res
+});
+
+export const GARDEN_NAME_ERROR = 'GARDEN_NAME_ERROR';
+export const gardenNameError = (err) => ({
+	type: GARDEN_NAME_ERROR,
+	err: err.message
+});
+/////////////////////////////////////////////
+////////  VEGGIE ACTIONS  ///////////////////
+/////////////////////////////////////////////
+// export const editVeggie = (veggie) => dispatch => {
+// 	return dispatch(focusVeggie(veggie));
+// };
+
+export const FOCUS_VEGGIE = 'FOCUS_VEGGIE';
+export const focusVeggie = (veggieFocus) => ({
+	type: FOCUS_VEGGIE,
+	veggieFocus
+});
+
+export const EDIT_VEGGIE_SUCCESS = 'EDIT_VEGGIE_SUCCESS';
+export const editVeggieSuccess = (veggie) => ({
+	type: EDIT_VEGGIE_SUCCESS,
+	veggie
+});
+
+export const EDIT_VEGGIE_ERROR = 'EDIT_VEGGIE_ERROR';
+export const editVeggieError = (error) => ({
+	type: EDIT_VEGGIE_ERROR,
+	error
+});
+/////////////////////////////////////////////
+////////  PLOT ACTIONS  /////////////////////
+/////////////////////////////////////////////
 export const EDIT_PLOT_SUCCESS = 'EDIT_PLOT_SUCCESS';
 export const editPlotSuccess = (plot) => ({
 	type: EDIT_PLOT_SUCCESS,
@@ -81,29 +157,6 @@ export const CREATE_PLOT_ERROR = 'CREATE_PLOT_ERROR';
 export const createPlotError = (error) => ({
 	type: CREATE_PLOT_ERROR,
 	error
-});
-
-export const TOGGLE_GARDEN_BOOLEAN = 'TOGGLE_GARDEN_BOOLEAN';
-export const toggleGardenBoolean = () => ({
-	type: TOGGLE_GARDEN_BOOLEAN
-});
-
-// export const SUBMIT_GARDEN_NAME = 'SUBMIT_GARDEN_NAME';
-// export const submitGardenName = (res) => ({
-// 	type: SUBMIT_GARDEN_NAME,
-// 	res
-// });
-
-export const SUBMIT_GARDEN = 'SUBMIT_GARDEN';
-export const submitGarden = (res) => ({
-	type: SUBMIT_GARDEN,
-	res
-});
-
-export const GARDEN_NAME_ERROR = 'GARDEN_NAME_ERROR';
-export const gardenNameError = (err) => ({
-	type: GARDEN_NAME_ERROR,
-	err: err.message
 });
 
 export const FETCH_PLOTS_REQUEST = 'FETCH_PLOTS_REQUEST';
@@ -123,7 +176,6 @@ export const fetchPlotsError = (err) => ({
 	err
 });
 
-/**	USER ACTIONS **/
 export const FOCUS_PLOT = 'FOCUS_PLOT';
 export const focusPlot = (plotFocus) => ({
 	type: FOCUS_PLOT,

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Input from './input';
 import GardensearchForm from './forms/gardensearch';
 import Garden from './garden';
 

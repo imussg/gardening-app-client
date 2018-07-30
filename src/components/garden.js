@@ -4,17 +4,31 @@ import Spinner from 'react-spinkit';
 
 import Plot from './plot';
 import PlotForm from './forms/plot';
-import { focusPlot, editPlot, createPlot } from '../actions/garden';
+import VeggieForm from './forms/veggie';
+import { focusPlot, focusVeggie, editPlot, editVeggie, createPlot } from '../actions/garden';
 
 
 export class Garden extends React.Component {
 
+	constructor(props) {
+		super(props);
+		console.log(props);
+		// this.veggieClick = this.veggieClick.bind(this);
+	}
+
 	onPlotClick(plotId) {
 		const clickedPlot = this.props.garden.plots.filter(plot => (plot.id === plotId))[0];
+		console.log(plotId);
 		this.props.dispatch(focusPlot(clickedPlot));
 	}
 
-	editPlot() {
+	veggieClick(veggieId) {
+		const clickedVeggie = this.props.plotFocus.veggies.filter(veggie => (veggie.id === veggieId))[0];
+		console.log(clickedVeggie);
+		this.props.dispatch(focusVeggie(clickedVeggie));
+	}
+
+	editPlot(event) {
 		this.props.dispatch(editPlot(this.props.plotFocus));
 	}
 
@@ -32,41 +46,55 @@ export class Garden extends React.Component {
 		}
 		const plots = this.props.garden.plots.map(plot => {
 			return (<Plot
-				plot={plot}
-				expanded={false}
-				onPlotClick={plotId => this.onPlotClick(plotId)}
-				toggleEditPlot={event => this.editPlot(event)}
-				key={plot.id}
+				plot={plot} 
+				expanded={false} 
+				onVeggieClick={veggieId => this.veggieClick(veggieId)} 
+				// veggieClick={veggieId => this.veggieClick(veggieId)}
+				onPlotClick={plotId => this.onPlotClick(plotId)} 
+				key={plot.id} 
 			/>);
 		});
 		let focusedPlotJsx = this.props.plotFocus ? this.generatePlot(this.props.plotFocus) : '';
+		let editVeggieJsx = this.generateVeggieModal();
 
 		return (<div className="garden-plots">
 			<div className="row plots">{plots}</div>
 			{this.getFocusedPlotTitleJsx()}
 			<div className="row focused-plot-veggies">
 				{focusedPlotJsx}
+				{editVeggieJsx}
 			</div>
-		</div>
-		);
+		</div>);
 	}
 	// sees if "editPlot" is true, makes title a form if so, displays it as a "h1" if false
 	getFocusedPlotTitleJsx() {
 		if(this.props.plotFocus) {	
 			if(this.props.editPlot) {
-				return (<div className="row  focused-plot-title">
+				return (<div className="row focused-plot-title">
 					<PlotForm />
 				</div>);
 			}
-			return (<div className="row  focused-plot-title">
+			return (<div className="row focused-plot-title" onClick={(event)=>this.editPlot(event.currentTarget)}>
 				<div className="col-4 new-plot">
-					<button onClick={()=>this.newPlot()} className="new-plot-button" type="button">New Plot</button>
+					<p className="plot-instructions">Click on the plot name to change it</p>
 				</div>
 				<div className="col-4 focused-plot-title">
 					{this.props.plotFocus.name}
 				</div>
 				<div className="col-4 edit-plot">
-					<button onClick={()=>this.editPlot()} className="edit-plot-button" type="button">Edit Plot</button>
+					<button onClick={()=>this.newVeggie()} className="new-veggie-button" type="button">Add new Veggie</button>
+				</div>
+			</div>);
+		}
+		return "";
+	}
+
+	generateVeggieModal() {
+		if(this.props.veggieFocus || this.props.newVeggie) {
+			return (<div className="veggie-modal-content">
+				<span className="close">&times;</span>
+				<div className="veggie-form">
+					<VeggieForm />
 				</div>
 			</div>);
 		}
@@ -78,7 +106,6 @@ export class Garden extends React.Component {
 			return <PlotForm />;
 		}
 		
-		// const plotForm = this.props.editPlot ? <PlotForm /> : noEditTitle;
 		return (<div className="expanded-plot">
 			<Plot
 				plot={plot}
@@ -99,7 +126,6 @@ const mapStateToProps = state => ({
 	newPlot: state.newPlot,
 	editPlot: state.editPlot,
 	error: state.error
-	// plots: [...state.plots]
 });
-
+ 
 export default connect(mapStateToProps)(Garden);

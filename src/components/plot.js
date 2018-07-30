@@ -3,19 +3,21 @@ import { connect } from 'react-redux';
 
 import { fetchPlots } from '../actions/garden';
 
-export default class Plot extends React.Component {
+class Plot extends React.Component {
 
 	constructor(props) {
-		super(props);
-		this.state = {
-			expanded: props.expanded,
-			plot: props.plot,
-			onPlotClick: props.onPlotClick
-		}
+		super(props)
+		// console.log(props);
 	}
 
+	// onVeggieClick(id) {
+	// 	console.log(this.props);
+	// 	console.log(id);
+	// this.props.onVeggieClick(id);
+	// }
+
 	createThumbnail() {
-		const thumbVeggie = this.state.plot.veggies.filter(veggie => {
+		const thumbVeggie = this.props.plot.veggies.filter(veggie => {
 			return veggie.pictureUrl !== "";
 		})[0];
 		const thumbPic = {
@@ -23,19 +25,20 @@ export default class Plot extends React.Component {
 			alt: thumbVeggie.pictureAlt
 		};
 
-		return (<div className="col-3" id={this.state.plot.id} onClick={event=>this.state.onPlotClick(event.currentTarget.getAttribute("id"))}>
+		return (<div className="col-3" id={this.props.plot.id} onClick={event=>this.props.onPlotClick(event.currentTarget.getAttribute("id"))}>
 			<img src={thumbPic.url} alt={thumbPic.alt} />
 			<figcaption>
-				<p className="caption-name">{this.state.plot.name}</p>
-				<p className="caption-veggies">{this.state.plot.veggies.length} veggies</p>
+				<p className="caption-name">{this.props.plot.name}</p>
+				<p className="caption-veggies">{this.props.plot.veggies.length} veggies</p>
 			</figcaption>
 		</div>
 		);
 	}
 
 	createExpanded() {
-		const veggies = this.state.plot.veggies.map(veggie => {
-			return (<div className="col-3" key={veggie.id}>
+		console.log(this.props);
+		const veggies = this.props.plot.veggies.map(veggie => {
+			return (<div className="col-3" id={veggie.id} key={veggie.id} onClick={event=>this.props.onVeggieClick(event.currentTarget.getAttribute("id"))}>
 				<div className="row veggie-picture" id={veggie.name}>
 					<img src={veggie.pictureUrl} alt={veggie.pictureAlt} />
 				</div>
@@ -60,7 +63,7 @@ export default class Plot extends React.Component {
 	}
 
 	render() {
-		if(this.state.expanded) {
+		if(this.props.expanded) {
 			return this.createExpanded();
 		} else {
 			return this.createThumbnail();
@@ -68,10 +71,10 @@ export default class Plot extends React.Component {
 	}
 }
 
-// const mapStateToProps = state => ({
-// 	expanded: state.expanded,
-// 	plot: state.plot,
-// 	name: state.name
-// });
+const mapStateToProps = state => ({
+	plot: state.plot,
+	expanded: state.expanded,
+	veggieFocus: state.veggieFocus
+});
 
-// export default connect(mapStateToProps)(Plot);
+export default connect(mapStateToProps)(Plot);

@@ -9,7 +9,12 @@ export class PlotForm extends React.Component {
 	onEditSubmit(event) {
 		event.preventDefault();
 		const newPlotName = this.plotName.value;
-		const editedPlot = {name: newPlotName, id: this.props.plotFocus.id};
+		const editedPlot = {
+			id: this.props.plotFocus.id,
+			name: newPlotName,
+			gardenId: this.props.plotFocus.gardenId,
+			veggies: this.props.plotFocus.veggies ? [...this.props.plotFocus.veggies] : []
+		};
 		this.props.dispatch(sendEditPlot(editedPlot));
 	}
 
@@ -22,14 +27,13 @@ export class PlotForm extends React.Component {
 			let name = this.props.plotFocus.name;
 			return (
 				<form className="edit-plot" onSubmit={(event) => this.onEditSubmit(event)} >
-					<div className="col-4 submit-plot">
-						<button type="submit" className="submit-plot-name">Submit</button>
-					</div>
-					<div className="col-4 plot-name-input">
-						<input type="text" ref={input => this.plotName = input} id="plot-name" name="plot-name" defaultValue={name+""} />
-					</div>
-					<div className="col-4 cancel-plot">
-						<button type="button" className="cancel-plot-name" onClick={event=>this.onCancel(event)}>Cancel</button>
+					<div className="edit-plot-form-elements row">
+						<div className="col-4 edit-plot-instructions">
+							Press enter to save the plot's name
+						</div>
+						<div className="col-4 plot-name-input">
+							<input type="text" ref={input => this.plotName = input} id="plot-name" name="plot-name" defaultValue={name+""} />
+						</div>
 					</div>
 				</form>
 			);
