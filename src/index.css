@@ -1,93 +1,288 @@
+/*body {
+  font-family: "source-sans-pro","Lato",sans-serif;
+  font-size: 0;
+}*/
+
 body {
   margin: 10;
   padding: 0;
   font-family: sans-serif;
 }
 
-.container {
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
+* {
+  box-sizing: border-box;
+  /*display: flex;*/
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.row {
+  max-width: 1000px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.col-1 {
-	grid-column: span 1;
+/* Clearfix */
+.row::before,
+.row::after {
+  display: table;
+  content: '';
 }
 
-.col-2 {
-	grid-column: span 2;
+.row::after {
+  clear: both;
 }
 
-.col-3 {
-	grid-column: span 3;
+.col-3, .col-4, .col-6, .col-12 {
+  float: left;
+
+  /* Gutters:
+   * Each column is padded by half-a-gutter on each side,
+   *
+   * Half a gutter is 10px, 10/960 (context) = 1.041666%
+   *
+   */
+  padding-left: 1.04166666%;
+  padding-right: 1.04166666%;
 }
 
-.col-4 {
-	grid-column: span 4;
+#root {
+  background-image: url("https://cdn.wallpapersafari.com/70/83/irvVAd.jpg");
+  height: 100%;
+  z-index: -1;
 }
 
-.col-5 {
-	grid-column: span 5;
+#root > .row {
+  z-index:1;
+  background-color: #d0ffd0;
+  border: 1px solid green;
 }
 
-.col-6 {
-	grid-column: span 6;
+form.garden-name-form {
+  background-color: #85e39a;
+  border-radius: 10px;
+  padding: 10px;
 }
 
-.col-7 {
-	grid-column: span 7;
+h1 {
+  font-size: 32px;
+  
+}
+figcaption {
+  text-align: left;
+  font-size: 15px;
+  padding: 0px 5px 5px 5px;
+  /*border: 1px solid gray;*/
+  background-color: #85e39a;
+}
+figcaption p {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-top: 5px;
+}
+p.caption-name {
+  font-weight: bold;
 }
 
-.col-8 {
-	grid-column: span 8;
+/* Mobile defaults */
+.col-3, .col-4, .col-6, .col-12 {
+  width: 100%;
+}
+img {
+  width: 100%;
+  height: 100%;
+  min-height: 175px;
+  max-height: 175px;
+  border: 1px solid lightgrey;
 }
 
-.col-9 {
-	grid-column: span 9;
+form {
+  margin: 10px;
 }
 
-.col-10 {
-	grid-column: span 10;
+input {
+  margin: 5px;
+  padding: 5px;
+  font-size: 15px;
 }
 
-.col-11 {
-	grid-column: span 11;
+button {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid;
+  font-size: 15px;
 }
 
-.col-12 {
-	grid-column: span 12;
+button.blue, button.veggie-edit, .edit-plot-button, .submit-plot-name {
+  color: white;
+  background-color: #00b0e6;
+  border-color: #00b0e6;
 }
 
-.flex-g/*rid {
-	display: flex;
-	flex: 1;
-	justify-content: space-between;
-}*/
-
-/* For mobile, b/c all CSS qualifiers from here are desktop sizes */
-/*[class*="col-"] {
-	width: 100%;
-}*/
-/* For Desktops */
-@media only screen and (min-width: 768px) {
-	/*.col-2 {
-		width: 45%;
-	}
-
-	.col-3 {
-		width: 32%;
-	}
-
-	.col-4 {
-		width: 22.5%;
-	}*/
+button.green, .new-plot-button, .new-veggie-button{
+  color: white;
+  background-color: green;
+  border-color: green;
 }
 
-@media only screen and (min-width: 1024px) {
-	
+button.veggie-delete, .cancel-plot-name {
+  color: white;
+  background-color: red;
+  border-color: red;
 }
 
-/*@media (max-width: 400px) {
-	.flex-grid {
-		display: block;
-	}
-}*/
+button#submit-garden-name {
+  float: left;
+}
+
+button#add-new-garden {
+  float: right;
+}
+
+#plot-name, .focused-plot-title, .plot-name-input {
+  font-size: 32px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  max-height: 36px;
+  border: 0px;
+  padding: 0px;
+}
+
+.plot-name-input {
+  margin-top: 0px;
+  text-align: center;
+  font-size: 29px;
+}
+
+input#plot-name {
+  margin: 0px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.new-plot, .submit-plot {
+  text-align: left;
+}
+
+.edit-plot, .cancel-plot {
+  text-align: right;
+}
+
+.veggie-description {
+  margin-left: 15px;
+}
+
+.expanded-plot {
+  border-top: 2px solid gray;
+  padding-top: 40px;
+}
+
+.expanded-plot > .row {
+  padding-bottom: 0px;
+  margin-bottom: 10px;
+}
+
+.expanded-plot > .col-3 {
+  padding: 0px;
+  margin-top: 30px;
+}
+
+.veggie-name {
+  font-weight: bold;
+}
+.veggie-condition, .veggie-created {
+  font-size: 15px;
+}
+
+.veggie-info-container {
+  height: 215px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.veg-edit-wrap {
+  text-align: left;
+}
+
+.veg-del-wrap {
+  text-align: right;
+}
+
+.veggie-picture {
+  padding: 0px;
+}
+.plot-instructions, .edit-plot-instructions {
+  font-size: 17px;
+  color: red;
+}
+.plot-name-input {
+  text-align: center;
+}
+.garden-error {
+  color: red;
+}
+.garden-success {
+  color: green;
+}
+
+@media only screen and (min-width: 640px) {
+  .col-2 {
+    width: 16.66%;
+  }
+  .col-3 {
+    width: 25%;
+  }
+
+  .col-4 {
+    width: 33.33%;
+  }
+
+  .col-6 {
+    width: 50%;
+  }
+
+  .col-12 {
+    width: 100%;
+  }
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
