@@ -7,6 +7,8 @@ import './index.css';
 
 import LandingPage from './components/landing-page';
 import Garden from './components/garden';
+=======
+import CheeseList from './components/cheese-list'
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
