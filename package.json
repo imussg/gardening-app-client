@@ -16,9 +16,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "bootstrap": "^4.1.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "reactstrap": "^6.2.0"
+    "redux-form": "^7.4.2"
   }
 }
