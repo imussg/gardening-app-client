@@ -45,14 +45,18 @@ export class Garden extends React.Component {
 			return <strong>{this.props.error}</strong>;
 		}
 		const plots = this.props.garden.plots.map(plot => {
-			return (<Plot
-				plot={plot} 
-				expanded={false} 
-				onVeggieClick={veggieId => this.veggieClick(veggieId)} 
-				// veggieClick={veggieId => this.veggieClick(veggieId)}
-				onPlotClick={plotId => this.onPlotClick(plotId)} 
-				key={plot.id} 
-			/>);
+			if(plot) {
+				return (<Plot
+					plot={plot} 
+					expanded={false} 
+					onVeggieClick={veggieId => this.veggieClick(veggieId)} 
+					// veggieClick={veggieId => this.veggieClick(veggieId)}
+					onPlotClick={plotId => this.onPlotClick(plotId)} 
+					key={plot.id} 
+				/>);
+			} else {
+				return "";
+			}
 		});
 		let focusedPlotJsx = this.props.plotFocus ? this.generatePlot(this.props.plotFocus) : '';
 		let editVeggieJsx = this.generateVeggieModal();

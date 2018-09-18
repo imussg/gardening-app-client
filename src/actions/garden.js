@@ -1,4 +1,7 @@
-const { BASE_URL } = require('../config');
+// require('dotenv').config();
+// const { BASE_URL } = require('../config');
+const BASE_URL = 'https://gardening-server.herokuapp.com';
+console.log(BASE_URL);
 
 /////////////////////////////////////////////
 ////// SERVER API CALLS FOR GARDEN REQ //////

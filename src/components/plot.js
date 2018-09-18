@@ -7,7 +7,7 @@ class Plot extends React.Component {
 
 	constructor(props) {
 		super(props)
-		// console.log(props);
+		console.log(props);
 	}
 
 	// onVeggieClick(id) {
@@ -72,9 +72,10 @@ class Plot extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	plot: state.plot,
-	expanded: state.expanded,
+	plotFocus: state.plotFocus,
+	// expanded: state.expanded,
 	veggieFocus: state.veggieFocus
 });
 
 export default connect(mapStateToProps)(Plot);
+// export default Plot;
