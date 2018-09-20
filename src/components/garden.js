@@ -12,7 +12,6 @@ export class Garden extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log(props);
 		// this.veggieClick = this.veggieClick.bind(this);
 	}
 
@@ -27,7 +26,7 @@ export class Garden extends React.Component {
 		console.log(clickedVeggie);
 		this.props.dispatch(focusVeggie(clickedVeggie));
 	}
-
+ 
 	editPlot(event) {
 		this.props.dispatch(editPlot(this.props.plotFocus));
 	}

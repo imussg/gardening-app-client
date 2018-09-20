@@ -8,13 +8,14 @@ export class PlotForm extends React.Component {
 
 	onEditSubmit(event) {
 		event.preventDefault();
-		const newPlotName = this.plotName.value;
-		const editedPlot = {
-			id: this.props.plotFocus.id,
-			name: newPlotName,
-			gardenId: this.props.plotFocus.gardenId,
-			veggies: this.props.plotFocus.veggies ? [...this.props.plotFocus.veggies] : []
-		};
+		let editedPlot = {...this.props.plotFocus};
+		editedPlot.name = this.plotName.value || this.props.plotFocus.name;
+		// const editedPlot = {
+		// 	name: newPlotName,
+		// 	gardenId: this.props.plotFocus.gardenId,
+		// 	veggies: this.props.plotFocus.veggies ? [...this.props.plotFocus.veggies] : []
+		// };
+		console.log(editedPlot);
 		this.props.dispatch(sendEditPlot(editedPlot));
 	}
 
