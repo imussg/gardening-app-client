@@ -47,9 +47,9 @@ export class LandingPage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	hasSubmittedGarden: state.hasSubmittedGarden,
-	gardenName: state.gardenName,
-	gardenId: state.gardenId
+	hasSubmittedGarden: state.garden.hasSubmittedGarden,
+	gardenName: state.garden.name,
+	gardenId: state.garden.id
 });
 
 export default connect(mapStateToProps)(LandingPage);

@@ -5,8 +5,9 @@ import Spinner from 'react-spinkit';
 import Plot from './plot';
 import PlotForm from './forms/plot';
 import VeggieForm from './forms/veggie';
-import { focusPlot, focusVeggie, editPlot, editVeggie, createPlot } from '../actions/garden';
-
+import { fetchGarden } from '../actions/garden';
+import { focusVeggie, editVeggie, createVeggie } from '../actions/veggie';
+import { focusPlot, editPlot, createPlot } from '../actions/plot';
 
 export class Garden extends React.Component {
 
@@ -57,7 +58,11 @@ export class Garden extends React.Component {
 				return "";
 			}
 		});
-		let focusedPlotJsx = this.props.plotFocus ? this.generatePlot(this.props.plotFocus) : '';
+		let focusedPlotJsx = this.props.plotLoading
+				? <Spinner spinnerName="circle" noFadeIn />
+				: (this.props.plotFocus
+					? this.generatePlot(this.props.plotFocus)
+					: '');
 		let editVeggieJsx = this.generateVeggieModal();
 
 		return (<div className="garden-plots">
@@ -124,11 +129,13 @@ export class Garden extends React.Component {
 const mapStateToProps = state => ({
 	hasSubmittedGarden: state.hasSubmittedGarden,
 	// the plot which is being focused on and hence has its details shown
-	plotFocus: state.plotFocus,
-	garden: state.garden,
-	newPlot: state.newPlot,
-	editPlot: state.editPlot,
-	error: state.error
+	plotFocus: state.plot.focus || null,
+	garden: state.garden.garden || null,
+	newPlot: state.plot.isnew,
+	editPlot: state.plot.isedit,
+	loading: state.garden.loading,
+	plotLoading: state.plot.loading,
+	error: state.garden.error
 });
  
 export default connect(mapStateToProps)(Garden);

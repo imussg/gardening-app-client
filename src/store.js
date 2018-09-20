@@ -1,8 +1,16 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import thunk from 'redux-thunk';
 import gardenReducer from './reducers/garden';
+import plotReducer from './reducers/plot';
+import veggieReducer from './reducers/veggie';
 
 export default createStore(
-	gardenReducer,
-	compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+	combineReducers({
+		garden: gardenReducer,
+		plot: plotReducer,
+		veggie: veggieReducer,
+		form: formReducer
+	}),
+	applyMiddleware(thunk)
 );

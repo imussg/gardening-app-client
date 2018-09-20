@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPlots } from '../actions/garden';
+import { fetchPlots } from '../actions/plot';
+ 
+export default class Plot extends React.Component {
 
-class Plot extends React.Component {
 
 	constructor(props) {
 		super(props)
-		console.log(props);
+		// console.log(props);
 	}
 
 	// onVeggieClick(id) {
@@ -17,9 +18,9 @@ class Plot extends React.Component {
 	// }
 
 	createThumbnail() {
-		const thumbVeggie = this.props.plot.veggies.filter(veggie => {
+		const thumbVeggie = this.props.plot.veggies ? this.props.plot.veggies.filter(veggie => {
 			return veggie.pictureUrl !== "";
-		})[0];
+		})[0] : {pictureUrl: "", pictureAlt: ""};
 		const thumbPic = {
 			url: thumbVeggie.pictureUrl,
 			alt: thumbVeggie.pictureAlt
@@ -36,8 +37,8 @@ class Plot extends React.Component {
 	}
 
 	createExpanded() {
-		console.log(this.props);
-		const veggies = this.props.plot.veggies.map(veggie => {
+		// console.log(this.props);
+		const veggies = this.props.plot.veggies ? this.props.plot.veggies.map(veggie => {
 			return (<div className="col-3" id={veggie.id} key={veggie.id} onClick={event=>this.props.onVeggieClick(event.currentTarget.getAttribute("id"))}>
 				<div className="row veggie-picture" id={veggie.name}>
 					<img src={veggie.pictureUrl} alt={veggie.pictureAlt} />
@@ -56,7 +57,7 @@ class Plot extends React.Component {
 					</div>
 				</div>
 			</div>);
-		});
+		}) : [];
 		return (<div className="row veggies-row">
 			{veggies}
 		</div>);
@@ -71,11 +72,10 @@ class Plot extends React.Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	plotFocus: state.plotFocus,
-	// expanded: state.expanded,
-	veggieFocus: state.veggieFocus
-});
+// const mapStateToProps = state => ({
+// 	plotFocus: state.plotFocus,
+// 	// expanded: state.expanded,
+// 	veggieFocus: state.veggieFocus
+// });
 
-export default connect(mapStateToProps)(Plot);
-// export default Plot;
+// export default connect(mapStateToProps)(Plot);

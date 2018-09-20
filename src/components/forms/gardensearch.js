@@ -49,8 +49,8 @@ export class GardensearchForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	garden: state.garden,
-	error: state.error
+	garden: state.garden.garden,
+	error: state.garden.error
 });
 
 export default connect(mapStateToProps)(GardensearchForm);

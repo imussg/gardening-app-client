@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 
-import { sendEditVeggie, focusVeggie } from '../../actions/garden';
+import { sendEditVeggie, focusVeggie } from '../../actions/veggie';
 
 export class VeggieForm extends React.Component {
 

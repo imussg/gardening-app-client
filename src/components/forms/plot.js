@@ -2,14 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 
-import { createPlot, sendEditPlot, editPlot } from '../../actions/garden';
+import { createPlot, sendEditPlot, editPlot } from '../../actions/plot';
 
 export class PlotForm extends React.Component {
 
 	onEditSubmit(event) {
 		event.preventDefault();
+		const name = this.plotName.value || this.props.plotFocus.name;
+		const veggies = this.props.plotFocus.veggies.map(vegg => {
+			return vegg.id;
+		});
 		let editedPlot = {...this.props.plotFocus};
-		editedPlot.name = this.plotName.value || this.props.plotFocus.name;
+		editedPlot = {
+			id: this.props.plotFocus.id, 
+			gardenId: this.props.plotFocus.gardenId,
+			name: name
+		};
+		
 		// const editedPlot = {
 		// 	name: newPlotName,
 		// 	gardenId: this.props.plotFocus.gardenId,
@@ -45,9 +54,9 @@ export class PlotForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	plotFocus: state.plotFocus ? state.plotFocus : null,
-	editPlot: state.editPlot,
-	newPlot: state.newPlot
+	plotFocus: state.plot.focus,
+	editPlot: state.plot.isedit,
+	newPlot: state.plot.isnew
 });
 
 export default connect(mapStateToProps)(PlotForm);
