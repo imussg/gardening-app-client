@@ -43,13 +43,13 @@ export default function gardenReducer(state=initialState, action) {
 			loading: true
 		});
 	} else if(action.type === FETCH_PLOTS_ERROR) {
-		console.log(action.err);
+		// console.log(action.err);
 		return Object.assign({}, state, {
 			loading: false,
 			error: action.err.message
 		});
 	} else if(action.type === FETCH_PLOTS_SUCCESS) {
-		console.log(action.res);
+		// console.log(action.res);
 		return Object.assign({}, state, {
 			hasSubmittedGarden: true,
 			loading: false,

@@ -24,7 +24,7 @@ export class PlotForm extends React.Component {
 		// 	gardenId: this.props.plotFocus.gardenId,
 		// 	veggies: this.props.plotFocus.veggies ? [...this.props.plotFocus.veggies] : []
 		// };
-		console.log(editedPlot);
+		// console.log(editedPlot);
 		this.props.dispatch(sendEditPlot(editedPlot));
 	}
 

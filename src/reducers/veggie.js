@@ -15,7 +15,9 @@ const initialState = {
 export default function veggieReducer(state=initialState, action) {
 	if(action.type === FOCUS_VEGGIE) {
 		return Object.assign({}, state, {
-			focus: action.veggieFocus
+			focus: action.veggieFocus,
+			isedit: true,
+			loading: false
 		});
 	} else if(action.type === EDIT_VEGGIE_SUCCESS) {
 		return Object.assign({}, state, {

@@ -31,7 +31,7 @@ export const sendEditPlot = (plot) => dispatch => {
 			return fetch(`${BASE_URL}/api/plots/${plot.id}`)
 			.then(res => res.json())
 			.then(plot => {
-				console.log(plot);
+				// console.log(plot);
 				return dispatch(editPlotSuccess(plot));
 			})
 		} else {
