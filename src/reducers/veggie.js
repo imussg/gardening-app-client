@@ -1,5 +1,6 @@
 import {
 	FOCUS_VEGGIE,
+	UNFOCUS_VEGGIE,
 	EDIT_VEGGIE_SUCCESS,
 	EDIT_VEGGIE_ERROR
 } from '../actions/veggie';
@@ -19,6 +20,10 @@ export default function veggieReducer(state=initialState, action) {
 			isedit: true,
 			loading: false
 		});
+	} else if(action.type === UNFOCUS_VEGGIE) {
+		return Object.assign({}, state, {
+			isedit: false
+		});
 	} else if(action.type === EDIT_VEGGIE_SUCCESS) {
 		return Object.assign({}, state, {
 			// set plotFocus to reload the entire plot with the edited veggie in it
@@ -34,7 +39,7 @@ export default function veggieReducer(state=initialState, action) {
 			isnew: false,
 			loading: false,
 			error: action.error
-		})
+		});
 	}
 	return state;
 }

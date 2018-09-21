@@ -6,7 +6,7 @@ import Plot from './plot';
 import PlotForm from './forms/plot';
 import VeggieForm from './forms/veggie';
 import { fetchGarden } from '../actions/garden';
-import { focusVeggie, editVeggie, createVeggie } from '../actions/veggie';
+import { focusVeggie, unfocusVeggie, editVeggie, createVeggie } from '../actions/veggie';
 import { focusPlot, editPlot, createPlot } from '../actions/plot';
 
 export class Garden extends React.Component {
@@ -99,14 +99,20 @@ export class Garden extends React.Component {
 	generateVeggieModal() {
 		if(this.props.editVeggie || this.props.newVeggie) {
 			console.log("in generating veggie edit modal");
-			return (<div className="veggie-modal-content">
-				<span className="close">&times;</span>
-				<div className="veggie-form">
-					<VeggieForm />
+			return (<div className="modal">
+				<div className="modal-content">
+					<span className="close" onClick={() => this.removeVeggieFocus()}>&times;</span>
+					<div className="veggie-form">
+						<VeggieForm />
+					</div>
 				</div>
 			</div>);
 		}
 		return "";
+	}
+
+	removeVeggieFocus() {
+		this.props.dispatch(unfocusVeggie());
 	}
 
 	generatePlot(plot) {

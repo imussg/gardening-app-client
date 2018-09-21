@@ -23,6 +23,11 @@ export const focusVeggie = (veggieFocus) => ({
 	veggieFocus
 });
 
+export const UNFOCUS_VEGGIE = 'UNFOCUS_VEGGIE';
+export const unfocusVeggie = () => ({
+	type: UNFOCUS_VEGGIE
+});
+
 export const EDIT_VEGGIE_SUCCESS = 'EDIT_VEGGIE_SUCCESS';
 export const editVeggieSuccess = (veggie) => ({
 	type: EDIT_VEGGIE_SUCCESS,

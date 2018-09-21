@@ -115,7 +115,7 @@ button {
   font-size: 15px;
 }
 
-button.blue, button.veggie-edit, .edit-plot-button, .submit-plot-name {
+button.blue, button.veggie-edit, .edit-plot-button, .submit-plot-name, button.submit {
   color: white;
   background-color: #00b0e6;
   border-color: #00b0e6;
@@ -127,7 +127,7 @@ button.green, .new-plot-button, .new-veggie-button{
   border-color: green;
 }
 
-button.veggie-delete, .cancel-plot-name {
+button.veggie-delete, .cancel-plot-name, button.cancel {
   color: white;
   background-color: red;
   border-color: red;
@@ -251,9 +251,10 @@ input#plot-name {
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
+    display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
+    /*min-height: 150px;*/
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -285,4 +286,21 @@ input#plot-name {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+.veggie-input {
+  text-align: right;
+  width: 100%;
+}
+label.veggie-label {
+  text-align: right;
+  width: 30%;
+  margin-right: 15px;
+}
+.veggie-input input {
+  text-align: right;
+  width: 50%;
+}
+button.submit, button.cancel {
+  font-size: 1.1em;
+  margin: 15px;
 }
