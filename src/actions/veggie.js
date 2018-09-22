@@ -10,7 +10,7 @@ export const sendEditVeggie = (veggie) => dispatch => {
 			body: JSON.stringify(veggie)
 	})
 	.then((res) => {
-		console.log(res);
+		// console.log(res);
 		if(res.ok) {
 			return fetch(`${BASE_URL}/api/plots/${veggie.plotId}`)
 			.then(res => res.json())
@@ -22,10 +22,37 @@ export const sendEditVeggie = (veggie) => dispatch => {
 	})
 	.catch(err => dispatch(editVeggieError(err)));
 };
+
+export const sendNewVeggie = (veggie) => dispatch => {
+	return fetch(`${BASE_URL}/api/veggies/`, {
+			method: 'POST',
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(veggie)
+	})
+	.then(res => {
+		if(res.ok) {
+			return fetch(`${BASE_URL}/api/plots/${veggie.plotId}`)
+			.then(res => res.json())
+			.then(plot => dispatch(editPlotSuccess(plot)))
+			.then(() => dispatch(editVeggieSuccess()));
+		} else {
+			return Promise.reject("editing veggie unsuccessful");
+		}
+	})
+	.catch(err => dispatch(editVeggieError(err)));
+};
+
 export const FOCUS_VEGGIE = 'FOCUS_VEGGIE';
 export const focusVeggie = (veggieFocus) => ({
 	type: FOCUS_VEGGIE,
 	veggieFocus
+});
+
+export const CREATE_VEGGIE = 'CREATE_VEGGIE';
+export const createVeggie = () => ({
+	type: CREATE_VEGGIE
 });
 
 export const UNFOCUS_VEGGIE = 'UNFOCUS_VEGGIE';

@@ -36,6 +36,10 @@ export class Garden extends React.Component {
 		this.props.dispatch(createPlot(this.props.plot));
 	}
 
+	newVeggie() {
+		this.props.dispatch(createVeggie());
+	}
+
 	render() {
 		if(this.props.loading) {
 			return <Spinner spinnerName="circle" noFadeIn />;

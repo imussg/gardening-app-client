@@ -1,5 +1,6 @@
 import {
 	FOCUS_VEGGIE,
+	CREATE_VEGGIE,
 	UNFOCUS_VEGGIE,
 	EDIT_VEGGIE_SUCCESS,
 	EDIT_VEGGIE_ERROR
@@ -18,6 +19,12 @@ export default function veggieReducer(state=initialState, action) {
 		return Object.assign({}, state, {
 			focus: action.veggieFocus,
 			isedit: true,
+			loading: false
+		});
+	} else if(action.type === CREATE_VEGGIE) {
+		return Object.assign({}, state, {
+			isedit: false,
+			isnew: true,
 			loading: false
 		});
 	} else if(action.type === UNFOCUS_VEGGIE) {
