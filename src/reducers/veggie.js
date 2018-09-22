@@ -29,7 +29,8 @@ export default function veggieReducer(state=initialState, action) {
 		});
 	} else if(action.type === UNFOCUS_VEGGIE) {
 		return Object.assign({}, state, {
-			isedit: false
+			isedit: false,
+			isnew: false
 		});
 	} else if(action.type === EDIT_VEGGIE_SUCCESS) {
 		return Object.assign({}, state, {

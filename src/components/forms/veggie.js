@@ -26,7 +26,7 @@ export class VeggieForm extends React.Component {
 		}
 	}
 
-	onCancel(event) {
+	onCancel() {
 		this.props.dispatch(unfocusVeggie());
 	}
 
@@ -65,7 +65,7 @@ export class VeggieForm extends React.Component {
 					</div>
 				</div>
 				<button type="submit" className="submit">Submit</button>
-				<button type="button" className="cancel">Cancel</button>
+				<button type="button" className="cancel" onClick={() => this.onCancel()}>Cancel</button>
 			</form>
 		);
 	}
