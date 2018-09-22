@@ -30,7 +30,6 @@ export default function veggieReducer(state=initialState, action) {
 			isedit: false,
 			isnew: false,
 			error: null,
-			focus: action.veggie,
 			loading: false
 		});
 	} else if(action.type === EDIT_VEGGIE_ERROR) {

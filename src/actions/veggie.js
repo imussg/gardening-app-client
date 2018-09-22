@@ -1,3 +1,4 @@
+import { editPlotSuccess } from './plot';
 const BASE_URL = 'https://gardening-server.herokuapp.com';
 
 export const sendEditVeggie = (veggie) => dispatch => {
@@ -9,8 +10,12 @@ export const sendEditVeggie = (veggie) => dispatch => {
 			body: JSON.stringify(veggie)
 	})
 	.then((res) => {
+		console.log(res);
 		if(res.ok) {
-			return dispatch(editVeggieSuccess(veggie));
+			return fetch(`${BASE_URL}/api/plots/${veggie.plotId}`)
+			.then(res => res.json())
+			.then(plot => dispatch(editPlotSuccess(plot)))
+			.then(() => dispatch(editVeggieSuccess()));
 		} else {
 			return Promise.reject("editing veggie unsuccessful");
 		}
@@ -30,8 +35,7 @@ export const unfocusVeggie = () => ({
 
 export const EDIT_VEGGIE_SUCCESS = 'EDIT_VEGGIE_SUCCESS';
 export const editVeggieSuccess = (veggie) => ({
-	type: EDIT_VEGGIE_SUCCESS,
-	veggie
+	type: EDIT_VEGGIE_SUCCESS
 });
 
 export const EDIT_VEGGIE_ERROR = 'EDIT_VEGGIE_ERROR';

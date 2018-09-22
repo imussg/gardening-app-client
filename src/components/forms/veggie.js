@@ -14,6 +14,7 @@ export class VeggieForm extends React.Component {
 		const veggiePictureAlt = `${veggieName}-pic`;
 		const editedVeggie = {
 			id: this.props.veggieFocus.id,
+			plotId: this.props.veggieFocus.plotId,
 			name: veggieName,
 			condition: veggieCondition,
 			pictureUrl: veggiePictureUrl,
