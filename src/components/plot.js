@@ -17,9 +17,10 @@ export class Plot extends React.Component {
 	}
 
 	createThumbnail() {
-		const thumbVeggie = this.props.plot.veggies ? this.props.plot.veggies.filter(veggie => {
+		console.log(this.props.plot);
+		const thumbVeggie = this.props.plot.veggies.length === 0 ? {pictureUrl: "", pictureAlt: ""} : this.props.plot.veggies.filter(veggie => {
 			return veggie.pictureUrl !== "";
-		})[0] : {pictureUrl: "", pictureAlt: ""};
+		})[0];
 		const thumbPic = {
 			url: thumbVeggie.pictureUrl,
 			alt: thumbVeggie.pictureAlt

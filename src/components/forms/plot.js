@@ -6,6 +6,10 @@ import { createPlot, sendEditPlot, editPlot } from '../../actions/plot';
 
 export class PlotForm extends React.Component {
 
+	componentDidMount() {
+		this.plotName.focus();
+	}
+
 	onEditSubmit(event) {
 		event.preventDefault();
 		const name = this.plotName.value || this.props.plotFocus.name;

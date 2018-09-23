@@ -6,6 +6,10 @@ import { sendEditVeggie, sendNewVeggie, focusVeggie, unfocusVeggie } from '../..
 
 export class VeggieForm extends React.Component {
 
+	componentDidMount() {
+		this.veggieName.focus();
+	}
+
 	onEditSubmit(event) {
 		event.preventDefault();
 		const veggieName = this.veggieName.value;
