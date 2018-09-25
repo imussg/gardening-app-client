@@ -5,10 +5,10 @@ import Veggie from './veggie';
  
 export class Plot extends React.Component {
 
-	constructor(props) {
-		super(props)
-		// console.log(props);
-	}
+	// constructor(props) {
+	// 	super(props)
+	// 	console.log(props);
+	// }
 
 	onVeggieClick(id) {
 		// console.log(this.props);

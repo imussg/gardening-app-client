@@ -1,10 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
+// import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 
-import { sendEditVeggie, sendNewVeggie, focusVeggie, unfocusVeggie } from '../../actions/veggie';
+import { sendEditVeggie, sendNewVeggie, unfocusVeggie, getAllVeggies } from '../../actions/veggie';
+
+import Veggie from '../veggie';
 
 export class VeggieForm extends React.Component {
+
+	componentDidMount() {
+		this.veggieName.focus();
+		this.veggieName.select();
+		// this.props.dispatch(getAllVeggies());
+	}
 
 	onEditSubmit(event) {
 		event.preventDefault();
@@ -30,43 +38,61 @@ export class VeggieForm extends React.Component {
 		this.props.dispatch(unfocusVeggie());
 	}
 
+	createVeggieJsx() {
+		console.log(this.props.possibleVeggies[this.props.index]);
+	}
+
 	render() {
+		if(!this.props.possibleVeggies) {
+			this.props.dispatch(getAllVeggies());
+		}
 		let name = "", condition = "", pictureUrl = "";
 		if(this.props.editVeggie) {
 			name = this.props.veggieFocus.name;
 			condition = this.props.veggieFocus.condition;
 			pictureUrl = this.props.veggieFocus.pictureUrl;
 		}
-
+		// console.log(this.props);
+		let currentVeg = "";
+		if(this.props.editVeggie && this.props.veggieFocus && this.props.possibleVeggies) {
+			currentVeg = this.props.possibleVeggies.filter(veg => this.props.veggieFocus.id === veg.id)[0];
+			currentVeg = <Veggie veggie={currentVeg} key={currentVeg.id} isNew={false}/>
+		} else {
+			currentVeg = this.props.possibleVeggies ? <Veggie veggie={this.props.possibleVeggies[this.props.index]} key={this.props.possibleVeggies[this.props.index].id} isNew={true}/> : "";
+		}
 		return (
-			<form className="edit-veggie" onSubmit={(event) => this.onEditSubmit(event)} >
-				<div className="edit-veggie-form-elements row">
-					<div className="col-4 veggie-input">
-						<label htmlFor="veggie-name" className="veggie-label">
-							Name:
-						</label>
-						<input type="text" ref={input => this.veggieName = input} id="veggie-name" name="veggie-name" defaultValue={name+""} />
-					</div>
+			<div className="veggie-container-div">
+				<div className="veggie-form">
+					<form className="edit-veggie" onSubmit={(event) => this.onEditSubmit(event)} >
+						<div className="edit-veggie-form-elements row">
+							<div className="col-4 veggie-input">
+								<label htmlFor="veggie-name" className="veggie-label">
+									Name:
+								</label>
+								<input type="text" ref={input => this.veggieName = input} id="veggie-name" name="veggie-name" defaultValue={name+""} />
+							</div>
+						</div>
+						<div className="edit-veggie-form-elements row">
+							<div className="col-4 veggie-input">
+								<label htmlFor="veggie-condition" className="veggie-label">
+									Condition: 
+								</label>
+								<input type="text" ref={input => this.veggieCondition = input} id="veggie-condition" name="veggie-condition" defaultValue={condition+""} />
+							</div>
+						</div>
+						<div className="edit-veggie-form-elements row">
+							<div className="col-4 veggie-input">
+								<label htmlFor="veggie-picture" className="veggie-label">
+									Picture URL: 
+								</label>
+								<input type="text" ref={input => this.veggiePictureUrl = input} id="veggie-picture" name="veggie-picture" defaultValue={pictureUrl+""} />
+							</div>
+						</div>
+						<button type="submit" className="submit">Submit</button>
+						<button type="button" className="cancel" onClick={() => this.onCancel()}>Cancel</button>
+					</form>
 				</div>
-				<div className="edit-veggie-form-elements row">
-					<div className="col-4 veggie-input">
-						<label htmlFor="veggie-condition" className="veggie-label">
-							Condition: 
-						</label>
-						<input type="text" ref={input => this.veggieCondition = input} id="veggie-condition" name="veggie-condition" defaultValue={condition+""} />
-					</div>
-				</div>
-				<div className="edit-veggie-form-elements row">
-					<div className="col-4 veggie-input">
-						<label htmlFor="veggie-picture" className="veggie-label">
-							Picture URL: 
-						</label>
-						<input type="text" ref={input => this.veggiePictureUrl = input} id="veggie-picture" name="veggie-picture" defaultValue={pictureUrl+""} />
-					</div>
-				</div>
-				<button type="submit" className="submit">Submit</button>
-				<button type="button" className="cancel" onClick={() => this.onCancel()}>Cancel</button>
-			</form>
+			</div>
 		);
 	}
 }
@@ -75,7 +101,9 @@ const mapStateToProps = state => ({
 	veggieFocus: state.veggie.focus || null,
 	plotFocus: state.plot.focus || null,
 	newVeggie: state.veggie.isnew,
-	editVeggie: state.veggie.isedit
+	editVeggie: state.veggie.isedit,
+	possibleVeggies: state.veggie.possibleVeggies,
+	index: state.veggie.index
 });
 
 export default connect(mapStateToProps)(VeggieForm);

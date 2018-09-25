@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 
 // import Input from './input';
-import { findGarden } from '../../actions/garden';
+import { createGarden, findGarden } from '../../actions/garden';
 
 export class GardensearchForm extends React.Component {
+
+	componentDidMount() {
+		this.gardenName.focus();
+	}
 
 	onSubmit(event) {
 		event.preventDefault();
@@ -13,17 +16,25 @@ export class GardensearchForm extends React.Component {
 		this.props.dispatch(findGarden(name));
 	}
 
+	onSubmitNew(event) {
+		const name = this.gardenName.value.trim();
+		const garden = {
+			name
+		};
+		this.props.dispatch(createGarden(garden));
+	}
+
 	render() {
 
-		let successMessage;
-        let errorMessage = this.props.error ? (<div className="garden-error">
-        	{this.props.error}
-        </div>) : '';
-        if(!this.props.error && this.props.garden) {
-        	successMessage = (<div className="garden-success">
-        		{"Garden successfully loaded"}
-        	</div>);
-        }
+		// let successMessage;
+        // let errorMessage = this.props.error ? (<div className="garden-error">
+        // 	{this.props.error}
+        // </div>) : '';
+        // if(!this.props.error && this.props.garden) {
+        // 	successMessage = (<div className="garden-success">
+        // 		{"Garden successfully loaded"}
+        // 	</div>);
+        // }
 
         return (
 			<form className="garden-name-form" onSubmit={event => this.onSubmit(event)}>
@@ -39,7 +50,8 @@ export class GardensearchForm extends React.Component {
 		            <button
 		            	className="green"
 		            	id="add-new-garden"
-		            	type="button">
+		            	type="button"
+		            	onClick={event => this.onSubmitNew(event)} >
 		            	Add New
 		            </button>
 		        </div>

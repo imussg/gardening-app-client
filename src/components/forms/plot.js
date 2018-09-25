@@ -1,59 +1,79 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
+// import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 
-import { createPlot, sendEditPlot, editPlot } from '../../actions/plot';
+import { createPlot, sendEditPlot, editPlot} from '../../actions/plot';
 
 export class PlotForm extends React.Component {
 
-	onEditSubmit(event) {
+	componentDidMount() {
+		this.plotName.focus();
+	}
+
+	onSubmit(event) {
 		event.preventDefault();
 		const name = this.plotName.value || this.props.plotFocus.name;
-		const veggies = this.props.plotFocus.veggies.map(vegg => {
+		const veggies = this.props.editPlot ? this.props.plotFocus.veggies.map(vegg => {
 			return vegg.id;
-		});
-		let editedPlot = {...this.props.plotFocus};
-		editedPlot = {
-			id: this.props.plotFocus.id, 
-			gardenId: this.props.plotFocus.gardenId,
+		}) : [];
+		// let editedPlot = this.props.editPlot ? {...this.props.plotFocus} : {};
+		let editedPlot = {
 			name: name
 		};
-		
+		if(this.props.editPlot) {
+			editedPlot.id = this.props.plotFocus.id;
+			this.props.dispatch(sendEditPlot(editedPlot));
+		} else {
+			this.props.dispatch(createPlot(editedPlot));
+		}
 		// const editedPlot = {
 		// 	name: newPlotName,
 		// 	gardenId: this.props.plotFocus.gardenId,
 		// 	veggies: this.props.plotFocus.veggies ? [...this.props.plotFocus.veggies] : []
 		// };
 		// console.log(editedPlot);
-		this.props.dispatch(sendEditPlot(editedPlot));
-	}
+	}1
 
 	onCancel(event) {
 		this.props.dispatch(editPlot());
 	}
 
 	render() {
+		let name = "";
 		if(this.props.editPlot) {
-			let name = this.props.plotFocus.name;
+			name = this.props.plotFocus.name;
 			return (
-				<form className="edit-plot" onSubmit={(event) => this.onEditSubmit(event)} >
+				<form className="edit-plot" onSubmit={(event) => this.onSubmit(event)} >
 					<div className="edit-plot-form-elements row">
 						<div className="col-4 edit-plot-instructions">
 							Press enter to save the plot's name
 						</div>
-						<div className="col-4 plot-name-input">
-							<input type="text" ref={input => this.plotName = input} id="plot-name" name="plot-name" defaultValue={name+""} />
+						<div className="plot-name-input">
+							<input type="text" ref={input => this.plotName = input} id="plot-name" name="plot-name" defaultValue={name+""}/>
 						</div>
 					</div>
 				</form>
 			);
 		} else {
-			return <form></form>;
+			return (<form className="new-plot" onSubmit={(event) => this.onSubmit(event)} >
+				<div className="edit-veggie-form-elements row">
+					<div className="col-4 veggie-input">
+						<label htmlFor="plot-name" className="plot-name-label">
+							Name:
+						</label>
+						<input type="text" ref={input => this.plotName = input} id="plot-name" name="plot-name" />
+					</div>
+				</div>
+				<button type="submit" className="submit">Submit</button>
+				<button type="button" className="cancel" onClick={() => this.onCancel()}>Cancel</button>
+			</form>
+			);
 		}
 	}
 }
 
 const mapStateToProps = state => ({
+	garden: state.garden.garden,
 	plotFocus: state.plot.focus,
 	editPlot: state.plot.isedit,
 	newPlot: state.plot.isnew

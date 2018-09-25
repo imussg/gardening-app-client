@@ -1,18 +1,23 @@
 const BASE_URL = 'https://gardening-server.herokuapp.com';
 
 export const createPlot = (plot) => dispatch => {
+	dispatch(editPlotRequest())
 	return fetch(`${BASE_URL}/api/plots`, {
 		method: 'POST',
 		headers: {
 			"Content-Type": "application/json"
 		},
-		body: {
-			name: plot.name,
-			gardenId: plot.gardenId,
-			veggies: plot.veggies ? [...plot.veggies] : []
+		body: JSON.stringify(plot)
+	})
+	.then(res => {
+		if(res.ok) {
+			// console.log(res);
+			return fetch(`${BASE_URL}/api/gardens/${plot.gardenId}`)
+			.then(res => res.json());
+		} else {
+			return Promise.reject("create plot unsuccessful");
 		}
 	})
-	.then(res => res.json())
 	.then(plot => dispatch(createPlotSuccess(plot)))
 	.catch(err => dispatch(createPlotError(err)));
 }

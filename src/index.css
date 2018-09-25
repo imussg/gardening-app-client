@@ -49,7 +49,7 @@ body {
 }
 
 #root {
-  background-image: url("https://cdn.wallpapersafari.com/70/83/irvVAd.jpg");
+  background-image: url("./garden-bg.jpg");
   height: 100%;
   z-index: -1;
 }
@@ -127,6 +127,11 @@ button.green, .new-plot-button, .new-veggie-button{
   border-color: green;
 }
 
+button.new-plot-button {
+  float: right;
+  margin-right: 10px;
+}
+
 button.veggie-delete, .cancel-plot-name, button.cancel {
   color: white;
   background-color: red;
@@ -153,14 +158,16 @@ button#add-new-garden {
 .plot-name-input {
   margin-top: 0px;
   text-align: center;
-  font-size: 29px;
+  font-size: .9em;
+  text-align: left;
+  padding-left: 10px;
 }
 
 input#plot-name {
   margin: 0px;
-  text-align: center;
-  width: 100%;
+  float: left;
   height: 100%;
+  padding-right: 15px;
 }
 
 .new-plot, .submit-plot {
@@ -291,16 +298,77 @@ input#plot-name {
   text-align: right;
   width: 100%;
 }
-label.veggie-label {
+label.veggie-label, label.plot-name-label {
   text-align: right;
   width: 30%;
   margin-right: 15px;
+  padding-bottom: 10px;
 }
-.veggie-input input {
+label.plot-name, input#plot-name {
+  display: inline;
+}
+.veggie-input input, input#plot-name {
   text-align: right;
-  width: 50%;
+  width: 30%;
+}
+input#plot-name {
+  border: solid black 1px;
+  border-radius: 5px;
 }
 button.submit, button.cancel {
   font-size: 1.1em;
   margin: 15px;
+}
+form.new-plot button {
+  float: right;
+}
+form.new-plot {
+  margin-bottom: 50px;
+}
+div.veggie-container-div {
+  width: 100%;
+  position: relative;
+}
+div.veggie-example {
+  position: absolute;
+  width: 30%;
+  float: left;
+  left: 10px;
+  bottom: 10%;
+}
+div.veggie-sample {
+  float: right;
+}
+div.veggie-quick-container {
+  position: relative;
+  text-align: center;
+  width:200px;
+  height:200px;
+}
+div.veggie-quick-title {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+img.veggie-quick-img {
+  width: 100%;
+  height: 100%;
+}
+button#previous-button {
+  font-size: .9em;
+  position: absolute;
+  left: 10px;
+  bottom: 30px;
+  z-index: 1;
+}
+button#next-button {
+  position: absolute;
+  right: 10px;
+  bottom: 30px;
+  z-index: 1;
+}
+button.new-plot-button {
+  margin-bottom: 15px;
 }

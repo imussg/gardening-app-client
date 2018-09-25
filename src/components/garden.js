@@ -5,16 +5,11 @@ import Spinner from 'react-spinkit';
 import Plot from './plot';
 import PlotForm from './forms/plot';
 import VeggieForm from './forms/veggie';
-import { fetchGarden } from '../actions/garden';
-import { focusVeggie, unfocusVeggie, editVeggie, createVeggie } from '../actions/veggie';
-import { focusPlot, editPlot, createPlot } from '../actions/plot';
+
+import { focusVeggie, unfocusVeggie, createVeggie } from '../actions/veggie';
+import { focusPlot, editPlot } from '../actions/plot';
 
 export class Garden extends React.Component {
-
-	constructor(props) {
-		super(props);
-		// this.veggieClick = this.veggieClick.bind(this);
-	}
 
 	onPlotClick(plotId) {
 		const clickedPlot = this.props.garden.plots.filter(plot => (plot.id === plotId))[0];
@@ -30,10 +25,6 @@ export class Garden extends React.Component {
  
 	editPlot(event) {
 		this.props.dispatch(editPlot(this.props.plot));
-	}
-
-	newPlot() {
-		this.props.dispatch(createPlot(this.props.plot));
 	}
 
 	newVeggie() {
@@ -67,6 +58,7 @@ export class Garden extends React.Component {
 					? this.generatePlot(this.props.plot)
 					: '');
 		let editVeggieJsx = this.generateVeggieModal();
+		let newPlotJsx = this.generatePlotModal();
 
 		return (<div className="garden-plots">
 			<div className="row plots">{plots}</div>
@@ -74,6 +66,7 @@ export class Garden extends React.Component {
 			<div className="row focused-plot-veggies">
 				{focusedPlotJsx}
 				{editVeggieJsx}
+				{newPlotJsx}
 			</div>
 		</div>);
 	}
@@ -102,7 +95,7 @@ export class Garden extends React.Component {
 
 	generateVeggieModal() {
 		if(this.props.editVeggie || this.props.newVeggie) {
-			console.log("in generating veggie edit modal");
+			// console.log("in generating veggie edit modal");
 			return (<div className="modal">
 				<div className="modal-content">
 					<span className="close" onClick={() => this.removeVeggieFocus()}>&times;</span>
@@ -113,6 +106,24 @@ export class Garden extends React.Component {
 			</div>);
 		}
 		return "";
+	}
+
+	generatePlotModal() {
+		if(this.props.newPlot) {
+			return (<div className="modal">
+				<div className="modal-content">
+					<span className="close" onClick={() => this.cancelNewPlot()}>&times;</span>
+					<div className="veggie-form">
+						<PlotForm />
+					</div>
+				</div>
+			</div>);
+		}
+		return "";
+	}
+
+	cancelNewPlot() {
+		this.props.dispatch(focusPlot(null));
 	}
 
 	removeVeggieFocus() {

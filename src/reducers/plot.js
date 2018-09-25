@@ -36,13 +36,15 @@ export default function plotReducer(state=initialState, action) {
 	} else if(action.type === NEW_PLOT) {
 		return Object.assign({}, state, {
 			isnew: true,
-			isedit: false
+			isedit: false,
+			focus: null
 		});
 	} else if(action.type === CREATE_PLOT_SUCCESS) {
 		return Object.assign({}, state, {
 			isedit: false,
 			isnew: false,
-			focus: action.plot
+			focus: action.plot,
+			loading: false
 		});
 	} else if(action.type === CREATE_PLOT_ERROR) {
 		return Object.assign({}, state, {
@@ -53,7 +55,7 @@ export default function plotReducer(state=initialState, action) {
 			focus: action.plotFocus,
 			loading: false,
 			isedit: false,
-			isneww: false,
+			isnew: false,
 			error: null
 		});
 	}

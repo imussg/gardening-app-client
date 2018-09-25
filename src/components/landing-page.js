@@ -4,17 +4,14 @@ import { connect } from 'react-redux';
 import GardensearchForm from './forms/gardensearch';
 import Garden from './garden';
 
-import { findGarden } from '../actions/garden';
+import { newPlot } from '../actions/plot';
+
+// import { findGarden } from '../actions/garden';
 
 export class LandingPage extends React.Component {
 
-	// onSubmit(name) {
-	// 	this.props.dispatch(findGarden(name));
-	// 	console.log(this.props);
-	// }
-
-	findGardenByName(name) {
-		this.props.dispatch(findGarden(name));
+	newPlot() {
+		this.props.dispatch(newPlot());
 	}
 
 	render() {
@@ -34,7 +31,10 @@ export class LandingPage extends React.Component {
 			return (
 				<div className="row">
 					<div className="col-12">
-						<h1>Gardening App</h1>
+						<h1>{this.props.garden ? this.props.garden.name : "Gardening App"}</h1>
+						<div className="new-plot">
+							<button onClick={()=>this.newPlot()} className="new-plot-button" type="button">Add New Plot</button>
+						</div>
 					</div>
 					<div className="col-12">
 						<Garden />
@@ -48,8 +48,7 @@ export class LandingPage extends React.Component {
 
 const mapStateToProps = state => ({
 	hasSubmittedGarden: state.garden.hasSubmittedGarden,
-	gardenName: state.garden.name,
-	gardenId: state.garden.id
+	garden: state.garden.garden
 });
 
 export default connect(mapStateToProps)(LandingPage);

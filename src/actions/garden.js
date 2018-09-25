@@ -1,5 +1,25 @@
+import { getAllVeggies } from './veggie';
+
 const BASE_URL = 'https://gardening-server.herokuapp.com';
 
+export const createGarden = (garden) => dispatch => {
+	dispatch(fetchPlotsRequest());
+	console.log(garden);
+	return fetch(`${BASE_URL}/api/gardens/`, {
+		method: 'POST',
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(garden)
+	})
+	.then(res => {
+		// console.log(res);
+		res.json();
+	})
+	.then(garden => dispatch(fetchPlotsSuccess(garden)))
+	.then(() => dispatch(getAllVeggies()))
+	.catch(err => dispatch(fetchPlotsError(err)));
+}
 export const fetchGarden = (id) => dispatch => {
 	// update state to reflect a request for a garden w/ given id
 	dispatch(fetchPlotsRequest());

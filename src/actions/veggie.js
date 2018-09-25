@@ -44,10 +44,42 @@ export const sendNewVeggie = (veggie) => dispatch => {
 	.catch(err => dispatch(editVeggieError(err)));
 };
 
+export const getAllVeggies = () => dispatch => {
+	return fetch(`${BASE_URL}/api/veggies/`)
+	.then(res => {
+		if(res.ok) {
+			return res.json()
+			.then(veggies => {
+				console.log(veggies);
+				dispatch(setPossibleVeggies(veggies));
+			});
+		} else {
+			return Promise.reject("editing veggie unsuccessful");
+		}
+	})
+	.catch(err => dispatch(editVeggieError(err)));
+};
+
+export const SET_POSSIBLE_VEGGIES = 'SET_POSSIBLE_VEGGIES';
+export const setPossibleVeggies = (veggies) => ({
+	type: SET_POSSIBLE_VEGGIES,
+	veggies
+});
+
 export const FOCUS_VEGGIE = 'FOCUS_VEGGIE';
 export const focusVeggie = (veggieFocus) => ({
 	type: FOCUS_VEGGIE,
 	veggieFocus
+});
+
+export const ADD_INDEX = 'ADD_INDEX';
+export const addIndex = () => ({
+	type: ADD_INDEX
+});
+
+export const MINUS_INDEX = 'MINUS_INDEX';
+export const minusIndex = () => ({
+	type: MINUS_INDEX
 });
 
 export const CREATE_VEGGIE = 'CREATE_VEGGIE';
