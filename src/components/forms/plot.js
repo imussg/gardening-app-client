@@ -8,7 +8,7 @@ export class PlotForm extends React.Component {
 
 	componentDidMount() {
 		this.plotName.focus();
-		this.props.dispatch(clicked());
+		this.plotName.select();
 	}
 
 	onEditSubmit(event) {

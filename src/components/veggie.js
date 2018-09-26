@@ -39,23 +39,23 @@ export class Veggie extends React.Component {
 	// 	this.props.dispatch(focusVeggie(this.props.possibleVeggies[this.props.index]));
 	// }
 
+	deleteVeggie() {
+		this.props.dispatch(deleteVeggie(this.props.veggie.id));
+	}
+
 	render() {
 		if(this.props.isNew || this.props.editVeg) {
 			return this.newVeggieOption();
 		}
 		return (<div className="col-3" id={this.props.veggie.id} key={this.props.veggie.id} >
 			<div className="row veggie-picture" id={this.props.veggie.name} onClick={()=>this.onVeggieClick()} >
-				<img src={this.props.veggie.pictureUrl} alt={this.props.veggie.pictureAlt} />
+				<img className="veggie-img" src={this.props.veggie.pictureUrl} alt={this.props.veggie.pictureAlt} />
+				<span className="close veggie-delete" onClick={() => this.deleteVeggie()}>&times;</span>
 			</div>
 			<div className="veggie-info-container">
 				<div className="row veggie-name">{this.props.veggie.name}</div>
 				<div className="row veggie-condition">{this.props.veggie.condition}</div>
 				<div className="row veggie-created">Started on: {this.props.veggie.createdAt}</div>
-			</div>
-			<div className="row veggie-crud-buttons" id={this.props.veggie.id}>
-				<div className="col-6 veg-del-wrap" onClick={(event) => this.onDeleteVeggieClick(event.currentTarget.getAttribute("id"))}>
-					<button className="veggie-delete" type="button">Delete</button>
-				</div>
 			</div>
 		</div>);
 	}

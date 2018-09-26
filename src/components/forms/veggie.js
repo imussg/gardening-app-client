@@ -6,6 +6,8 @@ import { sendEditVeggie, sendNewVeggie, unfocusVeggie, getAllVeggies } from '../
 
 import Veggie from '../veggie';
 
+const plotPicDefault = require('../../stock-plot.png');
+
 export class VeggieForm extends React.Component {
 
 	componentDidMount() {
@@ -18,7 +20,7 @@ export class VeggieForm extends React.Component {
 		event.preventDefault();
 		const veggieName = this.veggieName.value;
 		const veggieCondition = this.veggieCondition.value;
-		const veggiePictureUrl = this.veggiePictureUrl.value;
+		const veggiePictureUrl = this.veggiePictureUrl.value.trim() !== "" ? this.veggiePictureUrl.value.trim() : plotPicDefault;
 		const veggiePictureAlt = `${veggieName}-pic`;
 		let editedVeggie = this.props.editVeggie ? {"id": this.props.veggieFocus.id, "plotId": this.props.plotFocus.id} : {"plotId": this.props.plotFocus.id};
 		editedVeggie["name"] = veggieName;
@@ -45,7 +47,7 @@ export class VeggieForm extends React.Component {
 		if(!this.props.possibleVeggies) {
 			this.props.dispatch(getAllVeggies());
 		}
-		let name = "", condition = "", pictureUrl = "";
+		let name = "", condition = "", pictureUrl = plotPicDefault;
 		if(this.props.editVeggie) {
 			name = this.props.veggieFocus.name;
 			condition = this.props.veggieFocus.condition;
