@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import { focusVeggie, minusIndex, addIndex } from '../actions/veggie';
+=======
+import { focusVeggie, deleteVeggie } from '../actions/veggie';
+// import Modal from 'react-modal';
+>>>>>>> 06db9bcfdf5480948884d9af19b905cadaa60f35
 
 export class Veggie extends React.Component {
 
@@ -8,6 +13,7 @@ export class Veggie extends React.Component {
 		this.props.dispatch(focusVeggie(this.props.veggie));
 	}
 
+<<<<<<< HEAD
 	newVeggieOption() {
 		let currentVeggie = {pictureUrl: "", pictureAlt: "", name: ""};
 		if(this.props.editVeg) {
@@ -43,6 +49,15 @@ export class Veggie extends React.Component {
 		}
 		return (<div className="col-3" id={this.props.veggie.id} key={this.props.veggie.id} onClick={()=>this.onVeggieClick()} >
 			<div className="row veggie-picture" id={this.props.veggie.name}>
+=======
+	onDeleteVeggieClick(veggieId) {
+		this.props.dispatch(deleteVeggie(this.props.veggie));
+	}
+
+	render() {
+		return (<div className="col-3" id={this.props.veggie.id} key={this.props.veggie.id} >
+			<div className="row veggie-picture" id={this.props.veggie.name} onClick={()=>this.onVeggieClick()} >
+>>>>>>> 06db9bcfdf5480948884d9af19b905cadaa60f35
 				<img src={this.props.veggie.pictureUrl} alt={this.props.veggie.pictureAlt} />
 			</div>
 			<div className="veggie-info-container">
@@ -51,10 +66,7 @@ export class Veggie extends React.Component {
 				<div className="row veggie-created">Started on: {this.props.veggie.createdAt}</div>
 			</div>
 			<div className="row veggie-crud-buttons" id={this.props.veggie.id}>
-				<div className="col-6 veg-edit-wrap">
-					<button className="veggie-edit" type="button">Edit</button>
-				</div>
-				<div className="col-6 veg-del-wrap">
+				<div className="col-6 veg-del-wrap" onClick={(event) => this.onDeleteVeggieClick(event.currentTarget.getAttribute("id"))}>
 					<button className="veggie-delete" type="button">Delete</button>
 				</div>
 			</div>

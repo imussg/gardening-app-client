@@ -17,7 +17,7 @@ export const sendEditVeggie = (veggie) => dispatch => {
 			.then(plot => dispatch(editPlotSuccess(plot)))
 			.then(() => dispatch(editVeggieSuccess()));
 		} else {
-			return Promise.reject("editing veggie unsuccessful");
+			return Promise.reject("creating veggie unsuccessful");
 		}
 	})
 	.catch(err => dispatch(editVeggieError(err)));
@@ -65,6 +65,24 @@ export const setPossibleVeggies = (veggies) => ({
 	type: SET_POSSIBLE_VEGGIES,
 	veggies
 });
+
+export const deleteVeggie = (veggie) => dispatch => {
+	return fetch(`${BASE_URL}/api/veggies/${veggie.id}`, {
+		method: 'DELETE',
+		headers: {
+			"Content-Type": "application/json"
+		}
+	})
+	.then(res => {
+		if(res.ok) {
+			return fetch(`${BASE_URL}/api/plots/${veggie.plotId}`)
+			.then(res => res.json())
+			.then(plot => dispatch(editPlotSuccess(plot)))
+		} else {
+			return Promise.reject("deleting veggie unsuccessful");
+		}
+	})
+};
 
 export const FOCUS_VEGGIE = 'FOCUS_VEGGIE';
 export const focusVeggie = (veggieFocus) => ({

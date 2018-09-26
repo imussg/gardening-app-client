@@ -10,8 +10,11 @@ export class VeggieForm extends React.Component {
 
 	componentDidMount() {
 		this.veggieName.focus();
+<<<<<<< HEAD
 		this.veggieName.select();
 		// this.props.dispatch(getAllVeggies());
+=======
+>>>>>>> 06db9bcfdf5480948884d9af19b905cadaa60f35
 	}
 
 	onEditSubmit(event) {

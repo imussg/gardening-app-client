@@ -8,10 +8,16 @@ export class PlotForm extends React.Component {
 
 	componentDidMount() {
 		this.plotName.focus();
+<<<<<<< HEAD
 		this.props.dispatch(clicked());
 	}
 
 	onSubmit(event) {
+=======
+	}
+
+	onEditSubmit(event) {
+>>>>>>> 06db9bcfdf5480948884d9af19b905cadaa60f35
 		event.preventDefault();
 		const name = this.plotName.value || this.props.plotFocus.name;
 		// const veggies = this.props.editPlot ? this.props.plotFocus.veggies.map(vegg => {
