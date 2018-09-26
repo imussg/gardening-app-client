@@ -14,7 +14,6 @@ export class Plot extends React.Component {
 	}
 
 	createThumbnail() {
-<<<<<<< HEAD
 		let thumbVeggie = {};
 		thumbVeggie.pictureUrl = plotPicDefault;
 		thumbVeggie.pictureAlt = "default plot pic";
@@ -28,16 +27,14 @@ export class Plot extends React.Component {
 		let thumbPic = {};
 		thumbPic.url = thumbVeggie.pictureUrl;
 		thumbPic.alt = thumbVeggie.pictureAlt;
-=======
-		console.log(this.props.plot);
-		const thumbVeggie = this.props.plot.veggies.length === 0 ? {pictureUrl: "", pictureAlt: ""} : this.props.plot.veggies.filter(veggie => {
-			return veggie.pictureUrl !== "";
-		})[0];
-		const thumbPic = {
-			url: thumbVeggie.pictureUrl,
-			alt: thumbVeggie.pictureAlt
-		};
->>>>>>> 06db9bcfdf5480948884d9af19b905cadaa60f35
+		// console.log(this.props.plot);
+		// const thumbVeggie = this.props.plot.veggies.length === 0 ? {pictureUrl: "", pictureAlt: ""} : this.props.plot.veggies.filter(veggie => {
+		// 	return veggie.pictureUrl !== "";
+		// })[0];
+		// const thumbPic = {
+		// 	url: thumbVeggie.pictureUrl,
+		// 	alt: thumbVeggie.pictureAlt
+		// };
 
 		return (<div className="col-3" id={this.props.plot.id} onClick={event=>this.props.onPlotClick(event.currentTarget.getAttribute("id"))}>
 			<img src={thumbPic.url} alt={thumbPic.alt} />

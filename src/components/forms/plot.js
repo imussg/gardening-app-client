@@ -8,22 +8,12 @@ export class PlotForm extends React.Component {
 
 	componentDidMount() {
 		this.plotName.focus();
-<<<<<<< HEAD
 		this.props.dispatch(clicked());
 	}
 
-	onSubmit(event) {
-=======
-	}
-
 	onEditSubmit(event) {
->>>>>>> 06db9bcfdf5480948884d9af19b905cadaa60f35
 		event.preventDefault();
 		const name = this.plotName.value || this.props.plotFocus.name;
-		// const veggies = this.props.editPlot ? this.props.plotFocus.veggies.map(vegg => {
-		// 	return vegg.id;
-		// }) : [];
-		// let editedPlot = this.props.editPlot ? {...this.props.plotFocus} : {};
 		let editedPlot = {
 			name: name
 		};
@@ -34,12 +24,6 @@ export class PlotForm extends React.Component {
 			editedPlot.gardenId = this.props.garden.id;
 			this.props.dispatch(createPlot(editedPlot));
 		}
-		// const editedPlot = {
-		// 	name: newPlotName,
-		// 	gardenId: this.props.plotFocus.gardenId,
-		// 	veggies: this.props.plotFocus.veggies ? [...this.props.plotFocus.veggies] : []
-		// };
-		// console.log(editedPlot);
 	}1
 
 	onCancel(event) {
@@ -59,7 +43,7 @@ export class PlotForm extends React.Component {
 		if(this.props.editPlot) {
 			name = this.props.plotFocus.name;
 			return (
-				<form className="edit-plot" onSubmit={(event) => this.onSubmit(event)} >
+				<form className="edit-plot" onSubmit={(event) => this.onEditSubmit(event)} >
 					<div className="edit-plot-form-elements row" >
 						<label className="col-4 plot-instructions">
 							{instructions}

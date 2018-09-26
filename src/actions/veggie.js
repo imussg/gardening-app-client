@@ -3,14 +3,14 @@ const BASE_URL = 'https://gardening-server.herokuapp.com';
 
 export const sendEditVeggie = (veggie) => dispatch => {
 	return fetch(`${BASE_URL}/api/veggies/${veggie.id}`, {
-			method: 'PUT',
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(veggie)
+		method: 'PUT',
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(veggie)
 	})
-	.then((res) => {
-		// console.log(res);
+	.then(res => {
+		console.log(res);
 		if(res.ok) {
 			return fetch(`${BASE_URL}/api/plots/${veggie.plotId}`)
 			.then(res => res.json())
@@ -36,7 +36,8 @@ export const sendNewVeggie = (veggie) => dispatch => {
 			return fetch(`${BASE_URL}/api/plots/${veggie.plotId}`)
 			.then(res => res.json())
 			.then(plot => dispatch(editPlotSuccess(plot)))
-			.then(() => dispatch(editVeggieSuccess()));
+			.then(() => dispatch(editVeggieSuccess()))
+			.then(() => dispatch(getAllVeggies()));
 		} else {
 			return Promise.reject("editing veggie unsuccessful");
 		}

@@ -58,7 +58,7 @@ export class Garden extends React.Component {
 					? this.generatePlot(this.props.plot)
 					: '');
 		let editVeggieJsx = this.generateVeggieModal();
-		let newPlotJsx = this.generatePlotModal();
+		// let newPlotJsx = this.generatePlotModal();
 
 		return (<div className="garden-plots">
 			<div className="row plots">{plots}</div>
@@ -66,7 +66,6 @@ export class Garden extends React.Component {
 			<div className="row focused-plot-veggies">
 				{focusedPlotJsx}
 				{editVeggieJsx}
-				{newPlotJsx}
 			</div>
 		</div>);
 	}

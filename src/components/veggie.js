@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-import { focusVeggie, minusIndex, addIndex } from '../actions/veggie';
-=======
+// import { focusVeggie, minusIndex, addIndex } from '../actions/veggie';
 import { focusVeggie, deleteVeggie } from '../actions/veggie';
 // import Modal from 'react-modal';
->>>>>>> 06db9bcfdf5480948884d9af19b905cadaa60f35
 
 export class Veggie extends React.Component {
 
@@ -13,7 +10,6 @@ export class Veggie extends React.Component {
 		this.props.dispatch(focusVeggie(this.props.veggie));
 	}
 
-<<<<<<< HEAD
 	newVeggieOption() {
 		let currentVeggie = {pictureUrl: "", pictureAlt: "", name: ""};
 		if(this.props.editVeg) {
@@ -29,35 +25,26 @@ export class Veggie extends React.Component {
 			</div>);
 	}
 
-	previous() {
-		console.log(this.props);
-		this.props.dispatch(minusIndex());
-		const nextFocusVeggie = this.props.possibleVeggies[this.props.index];
-		this.props.veggie = {...nextFocusVeggie};
-		this.props.dispatch(focusVeggie(nextFocusVeggie));
-		console.log(this.props);
-	}
+	// previous() {
+	// 	console.log(this.props);
+	// 	this.props.dispatch(minusIndex());
+	// 	const nextFocusVeggie = this.props.possibleVeggies[this.props.index];
+	// 	this.props.veggie = {...nextFocusVeggie};
+	// 	this.props.dispatch(focusVeggie(nextFocusVeggie));
+	// 	console.log(this.props);
+	// }
 
-	next() {
-		this.props.dispatch(addIndex());
-		this.props.dispatch(focusVeggie(this.props.possibleVeggies[this.props.index]));
-	}
+	// next() {
+	// 	this.props.dispatch(addIndex());
+	// 	this.props.dispatch(focusVeggie(this.props.possibleVeggies[this.props.index]));
+	// }
 
 	render() {
 		if(this.props.isNew || this.props.editVeg) {
 			return this.newVeggieOption();
 		}
-		return (<div className="col-3" id={this.props.veggie.id} key={this.props.veggie.id} onClick={()=>this.onVeggieClick()} >
-			<div className="row veggie-picture" id={this.props.veggie.name}>
-=======
-	onDeleteVeggieClick(veggieId) {
-		this.props.dispatch(deleteVeggie(this.props.veggie));
-	}
-
-	render() {
 		return (<div className="col-3" id={this.props.veggie.id} key={this.props.veggie.id} >
 			<div className="row veggie-picture" id={this.props.veggie.name} onClick={()=>this.onVeggieClick()} >
->>>>>>> 06db9bcfdf5480948884d9af19b905cadaa60f35
 				<img src={this.props.veggie.pictureUrl} alt={this.props.veggie.pictureAlt} />
 			</div>
 			<div className="veggie-info-container">

@@ -311,7 +311,11 @@ label.veggie-label, label.plot-name-label {
 label.plot-name, input#plot-name {
   display: inline;
 }
-.veggie-input input, input#plot-name {
+.veggie-input input {
+  text-align: left;
+  width: 30%;
+}
+input#plot-name {
   text-align: right;
   width: 30%;
 }
@@ -328,6 +332,9 @@ form.new-plot button {
 }
 form.new-plot {
   margin-bottom: 50px;
+}
+div.veggie-form {
+  padding-right: 30px;
 }
 div.veggie-container-div {
   width: 100%;

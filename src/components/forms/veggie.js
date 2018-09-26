@@ -10,11 +10,8 @@ export class VeggieForm extends React.Component {
 
 	componentDidMount() {
 		this.veggieName.focus();
-<<<<<<< HEAD
 		this.veggieName.select();
 		// this.props.dispatch(getAllVeggies());
-=======
->>>>>>> 06db9bcfdf5480948884d9af19b905cadaa60f35
 	}
 
 	onEditSubmit(event) {
@@ -23,17 +20,16 @@ export class VeggieForm extends React.Component {
 		const veggieCondition = this.veggieCondition.value;
 		const veggiePictureUrl = this.veggiePictureUrl.value;
 		const veggiePictureAlt = `${veggieName}-pic`;
-		const editedVeggie = {
-			plotId: this.props.plotFocus.id,
-			name: veggieName,
-			condition: veggieCondition,
-			pictureUrl: veggiePictureUrl,
-			pictureAlt: veggiePictureAlt
-		};
+		let editedVeggie = this.props.editVeggie ? {"id": this.props.veggieFocus.id, "plotId": this.props.plotFocus.id} : {"plotId": this.props.plotFocus.id};
+		editedVeggie["name"] = veggieName;
+		editedVeggie["condition"] = veggieCondition;
+		editedVeggie["pictureUrl"] = veggiePictureUrl;
+		editedVeggie["pictureAlt"] = veggiePictureAlt;
 		if(this.props.editVeggie) {
 			this.props.dispatch(sendEditVeggie(editedVeggie));
 		} else {
 			this.props.dispatch(sendNewVeggie(editedVeggie));
+			// this.props.dispatch(getAllVeggies());
 		}
 	}
 
