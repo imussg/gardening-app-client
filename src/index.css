@@ -132,7 +132,7 @@ button.new-plot-button {
   margin-right: 10px;
 }
 
-button.veggie-delete, .cancel-plot-name, button.cancel {
+button.veggie-delete, .cancel-plot-name, button.cancel, button.delete-garden-button {
   color: white;
   background-color: red;
   border-color: red;
@@ -163,9 +163,13 @@ button#add-new-garden {
   padding-left: 10px;
 }
 
+.veggie-input label {
+  margin-top: 10px;
+}
+
 input#plot-name {
   margin: 0px;
-  float: left;
+  float: right;
   height: 100%;
   padding-right: 15px;
 }
@@ -183,7 +187,7 @@ input#plot-name {
 }
 
 .expanded-plot {
-  border-top: 2px solid gray;
+  /*border-top: 2px solid gray;*/
   padding-top: 40px;
 }
 

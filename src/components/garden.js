@@ -39,7 +39,7 @@ export class Garden extends React.Component {
 		if(this.props.error) {
 			return <strong>{this.props.error}</strong>;
 		}
-		const plots = this.props.garden.plots.map(plot => {
+		const plots = this.props.garden.plots ? this.props.garden.plots.map(plot => {
 			if(plot) {
 				return (<Plot
 					plot={plot} 
@@ -51,7 +51,7 @@ export class Garden extends React.Component {
 			} else {
 				return "";
 			}
-		});
+		}) : "";
 		let focusedPlotJsx = this.props.plotLoading
 				? <Spinner spinnerName="circle" noFadeIn />
 				: (this.props.plot
@@ -72,6 +72,7 @@ export class Garden extends React.Component {
 	}
 	// sees if "editPlot" is true, makes title a form if so, displays it as a "h1" if false
 	getFocusedPlotTitleJsx() {
+		let instructions = this.props.plotClicked ? "" : "Click on the plot name to change it";
 		if(this.props.plot) {	
 			if(this.props.editPlot) {
 				return (<div className="row focused-plot-title">
@@ -80,7 +81,7 @@ export class Garden extends React.Component {
 			}
 			return (<div className="row focused-plot-title" onClick={(event)=>this.editPlot(event.currentTarget)}>
 				<div className="col-4 new-plot">
-					<p className="plot-instructions">Click on the plot name to change it</p>
+					<p className="plot-instructions">{instructions}</p>
 				</div>
 				<div className="col-4 focused-plot-title">
 					{this.props.plot.name}
@@ -160,6 +161,7 @@ const mapStateToProps = state => ({
 	loading: state.garden.loading,
 	plotLoading: state.plot.loading,
 	veggieLoading: state.veggie.loading,
+	plotClicked: state.plot.clicked,
 	error: state.garden.error
 });
  

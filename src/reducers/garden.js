@@ -5,6 +5,7 @@ import {
 	SUBMIT_GARDEN,
 	GARDEN_NAME_ERROR,
 	TOGGLE_GARDEN_BOOLEAN,
+	DELETE_GARDEN_SUCCESS
 } from '../actions/garden';
  
 const initialState = {
@@ -54,6 +55,13 @@ export default function gardenReducer(state=initialState, action) {
 			hasSubmittedGarden: true,
 			loading: false,
 			garden: action.res,
+			error: null
+		});
+	} else if(action.type === DELETE_GARDEN_SUCCESS) {
+		return Object.assign({}, state, {
+			hasSubmittedGarden: false,
+			loading: false,
+			garden: null,
 			error: null
 		});
 	}

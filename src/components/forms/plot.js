@@ -2,20 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 
-import { createPlot, sendEditPlot, editPlot} from '../../actions/plot';
+import { createPlot, sendEditPlot, editPlot, clicked } from '../../actions/plot';
 
 export class PlotForm extends React.Component {
 
 	componentDidMount() {
 		this.plotName.focus();
+		this.props.dispatch(clicked());
 	}
 
 	onSubmit(event) {
 		event.preventDefault();
 		const name = this.plotName.value || this.props.plotFocus.name;
-		const veggies = this.props.editPlot ? this.props.plotFocus.veggies.map(vegg => {
-			return vegg.id;
-		}) : [];
+		// const veggies = this.props.editPlot ? this.props.plotFocus.veggies.map(vegg => {
+		// 	return vegg.id;
+		// }) : [];
 		// let editedPlot = this.props.editPlot ? {...this.props.plotFocus} : {};
 		let editedPlot = {
 			name: name
@@ -24,6 +25,7 @@ export class PlotForm extends React.Component {
 			editedPlot.id = this.props.plotFocus.id;
 			this.props.dispatch(sendEditPlot(editedPlot));
 		} else {
+			editedPlot.gardenId = this.props.garden.id;
 			this.props.dispatch(createPlot(editedPlot));
 		}
 		// const editedPlot = {
@@ -38,16 +40,24 @@ export class PlotForm extends React.Component {
 		this.props.dispatch(editPlot());
 	}
 
+	firstClick() {
+		this.props.dispatch(clicked());
+	}
+
 	render() {
+		let instructions = "Press enter to save the plot's name";
+		if(this.props.clicked) {
+			instructions = "";
+		}
 		let name = "";
 		if(this.props.editPlot) {
 			name = this.props.plotFocus.name;
 			return (
 				<form className="edit-plot" onSubmit={(event) => this.onSubmit(event)} >
-					<div className="edit-plot-form-elements row">
-						<div className="col-4 edit-plot-instructions">
-							Press enter to save the plot's name
-						</div>
+					<div className="edit-plot-form-elements row" >
+						<label className="col-4 plot-instructions">
+							{instructions}
+						</label>
 						<div className="plot-name-input">
 							<input type="text" ref={input => this.plotName = input} id="plot-name" name="plot-name" defaultValue={name+""}/>
 						</div>
@@ -76,7 +86,8 @@ const mapStateToProps = state => ({
 	garden: state.garden.garden,
 	plotFocus: state.plot.focus,
 	editPlot: state.plot.isedit,
-	newPlot: state.plot.isnew
+	newPlot: state.plot.isnew,
+	clicked: state.plot.clicked
 });
 
 export default connect(mapStateToProps)(PlotForm);

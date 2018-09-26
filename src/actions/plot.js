@@ -1,29 +1,25 @@
+import { submitGarden } from './garden';
+
 const BASE_URL = 'https://gardening-server.herokuapp.com';
 
 export const createPlot = (plot) => dispatch => {
-	dispatch(editPlotRequest())
-	return fetch(`${BASE_URL}/api/plots`, {
+	dispatch(editPlotRequest());
+	return fetch(`${BASE_URL}/api/plots/`, {
 		method: 'POST',
 		headers: {
 			"Content-Type": "application/json"
 		},
 		body: JSON.stringify(plot)
 	})
-	.then(res => {
-		if(res.ok) {
-			// console.log(res);
-			return fetch(`${BASE_URL}/api/gardens/${plot.gardenId}`)
-			.then(res => res.json());
-		} else {
-			return Promise.reject("create plot unsuccessful");
-		}
-	})
-	.then(plot => dispatch(createPlotSuccess(plot)))
+	.then(res => fetch(`${BASE_URL}/api/gardens/${plot.gardenId}`))
+	.then(res => res.json())
+	.then(garden => dispatch(submitGarden(garden)))
+	.then(() => dispatch(createPlotSuccess(null)))
 	.catch(err => dispatch(createPlotError(err)));
 }
 export const sendEditPlot = (plot) => dispatch => {
 	// console.log(plot);
-	dispatch(editPlotRequest())
+	dispatch(editPlotRequest());
 	return fetch(`${BASE_URL}/api/plots/${plot.id}`, {
 		method: 'PUT',
 		headers: {
@@ -83,4 +79,9 @@ export const editPlot = () => ({
 export const NEW_PLOT = 'NEW_PLOT';
 export const newPlot = () => ({
 	type: NEW_PLOT
+});
+
+export const CLICKED = 'CLICKED';
+export const clicked = () => ({
+	type: CLICKED
 });

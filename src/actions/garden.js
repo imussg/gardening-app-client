@@ -4,7 +4,7 @@ const BASE_URL = 'https://gardening-server.herokuapp.com';
 
 export const createGarden = (garden) => dispatch => {
 	dispatch(fetchPlotsRequest());
-	console.log(garden);
+	// console.log(garden);
 	return fetch(`${BASE_URL}/api/gardens/`, {
 		method: 'POST',
 		headers: {
@@ -49,6 +49,25 @@ export const findGarden = (name) => dispatch => {
 		})
 		.catch(err => dispatch(gardenNameError(err)));
 }
+export const deleteGarden = (gardenId) => dispatch => {
+	return fetch(`${BASE_URL}/api/gardens/${gardenId}`, {
+		method: 'DELETE'
+	})
+	.then(res => {
+		if(res.ok) {
+			dispatch(deleteGardenSuccess());
+		} else {
+			return Promise.reject("delete garden unsuccessful");
+		}
+	})
+	.catch(err => dispatch(fetchPlotsError(err)));
+}
+
+export const DELETE_GARDEN_SUCCESS = 'DELETE_GARDEN_SUCCESS';
+export const deleteGardenSuccess = () => ({
+	type: DELETE_GARDEN_SUCCESS
+});
+
 export const FETCH_PLOTS_REQUEST = 'FETCH_PLOTS_REQUEST';
 export const fetchPlotsRequest = () => ({
 	type: FETCH_PLOTS_REQUEST
@@ -79,54 +98,3 @@ export const gardenNameError = (err) => ({
 	type: GARDEN_NAME_ERROR,
 	err: err.message
 });
-/////////////////////////////////////////////
-////// SERVER API CALLS FOR PLOT REQ'S //////
-/////////////////////////////////////////////
-// export const createPlot = (plot) => dispatch => {
-// 	return fetch(`${BASE_URL}/api/plots`, {
-// 		method: 'POST',
-// 		headers: {
-// 			"Content-Type": "application/json"
-// 		},
-// 		body: {
-// 			name: plot.name,
-// 			gardenId: plot.gardenId,
-// 			veggies: plot.veggies ? [...plot.veggies] : []
-// 		}
-// 	})
-// 	.then(res => res.json())
-// 	.then(plot => dispatch(createPlotSuccess(plot)))
-// 	.catch(err => dispatch(createPlotError(err)));
-// }
-// export const sendEditPlot = (plot) => dispatch => {
-// 	console.log(plot);
-// 	return fetch(`${BASE_URL}/api/plots/${plot.id}`, {
-// 		method: 'PUT',
-// 		headers: {
-// 			"Content-Type": "application/json"
-// 		},
-// 		body: JSON.stringify(plot)
-// 	})
-// 	.then((res) => {
-// 		console.log(res);
-// 		if(res.ok) {
-// 			return dispatch(editPlotSuccess(plot));
-// 		} else {
-// 			return Promise.reject("editing plot unsuccessful");
-// 		}
-// 	})
-// 	.catch(err => dispatch(createPlotError(err)));
-// }
-/////////////////////////////////////////////
-////// SERVER API CALLS FOR VEGGIE REQ'S ////
-/////////////////////////////////////////////
-// export const fetchVeggie = (veggieId) => dispatch => {
-// 	return fetch(`${BASE_URL}/api/veggies/${veggieId}`, { method: 'GET' })
-// 		.then(veggie => dispatch(fetchVeggieSuccess(veggie)))
-// 		.catch(error => dispatch(fetchVeggie))
-// }
-
-
-/////////////////////////////////////////////
-////////  GARDEN ACTIONS  ///////////////////
-/////////////////////////////////////////////

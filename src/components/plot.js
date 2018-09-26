@@ -2,13 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Veggie from './veggie';
+
+const plotPicDefault = require('../stock-plot.png');
  
 export class Plot extends React.Component {
-
-	// constructor(props) {
-	// 	super(props)
-	// 	console.log(props);
-	// }
 
 	onVeggieClick(id) {
 		// console.log(this.props);
@@ -17,13 +14,19 @@ export class Plot extends React.Component {
 	}
 
 	createThumbnail() {
-		const thumbVeggie = this.props.plot.veggies ? this.props.plot.veggies.filter(veggie => {
-			return veggie.pictureUrl !== "";
-		})[0] : {pictureUrl: "", pictureAlt: ""};
-		const thumbPic = {
-			url: thumbVeggie.pictureUrl,
-			alt: thumbVeggie.pictureAlt
-		};
+		let thumbVeggie = {};
+		thumbVeggie.pictureUrl = plotPicDefault;
+		thumbVeggie.pictureAlt = "default plot pic";
+		if(this.props.plot.veggies.length > 0) {
+			const tempVeg = this.props.plot.veggies.filter(veggie => {
+				return veggie.pictureUrl !== "";
+			})[0];
+			thumbVeggie.pictureUrl = tempVeg.pictureUrl;
+			thumbVeggie.pictureAlt = tempVeg.pictureAlt;
+		}
+		let thumbPic = {};
+		thumbPic.url = thumbVeggie.pictureUrl;
+		thumbPic.alt = thumbVeggie.pictureAlt;
 
 		return (<div className="col-3" id={this.props.plot.id} onClick={event=>this.props.onPlotClick(event.currentTarget.getAttribute("id"))}>
 			<img src={thumbPic.url} alt={thumbPic.alt} />

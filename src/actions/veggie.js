@@ -102,3 +102,8 @@ export const editVeggieError = (error) => ({
 	type: EDIT_VEGGIE_ERROR,
 	error
 });
+
+export const CLICKED = 'CLICKED';
+export const clicked = () => ({
+	type: CLICKED
+});

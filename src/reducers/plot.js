@@ -5,7 +5,8 @@ import {
 	EDIT_PLOT_SUCCESS,
 	NEW_PLOT,
 	CREATE_PLOT_SUCCESS,
-	CREATE_PLOT_ERROR
+	CREATE_PLOT_ERROR,
+	CLICKED
 } from '../actions/plot';
 
 const initialState = {
@@ -13,7 +14,8 @@ const initialState = {
 	isedit: false,
 	isnew: false,
 	error: null,
-	loading: false
+	loading: false,
+	clicked: false
 };
 
 export default function plotReducer(state=initialState, action) {
@@ -57,6 +59,10 @@ export default function plotReducer(state=initialState, action) {
 			isedit: false,
 			isnew: false,
 			error: null
+		});
+	} else if(action.type === CLICKED) {
+		return Object.assign({}, state, {
+			clicked: true
 		});
 	}
 	return state;
