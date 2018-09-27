@@ -19,4 +19,4 @@ _Either create a new garden, or use "Imus Garden" to see a filled out garden_
 ![ScreenShot](src/images/first-screen-garden.png)
 
 _When you click on a plot widget you will see an expanded view_
-![ScreenShot](src/images/first-screen-garden.png)
+![ScreenShot](src/images/garden-expanded.png)
