@@ -14,5 +14,6 @@
 
 _The screen when you arrive_
 ![ScreenShot](src/images/first-screen.png)
+
 _Either create a new garden, or use "Imus Garden" to see a filled out garden_
 ![ScreenShot](src/images/first-screen-garden.png)
