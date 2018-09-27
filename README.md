@@ -1,5 +1,5 @@
 ## __Live Site:__ [Gardening App](https://gardening-client.herokuapp.com/)
----
+
 ### Tech Stack:
 <dl>
   <dt>Node</dt>
