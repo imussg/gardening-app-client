@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import GardensearchForm from './forms/gardensearch';
 import Garden from './garden';
 
-import { deleteGarden } from '../actions/garden';
-import { newPlot, clicked } from '../actions/plot';
+// import { deleteGarden } from '../actions/garden';
+import { clicked } from '../actions/plot';
 
 // import { findGarden } from '../actions/garden';
 
