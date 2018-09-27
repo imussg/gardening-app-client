@@ -21,3 +21,6 @@ _Either create a new garden, or use "Imus Garden" to see a filled out garden_
 
 _When you click on a plot widget you will see an expanded view_
 ![ScreenShot](src/images/garden-expanded.png)
+
+_The expanded view of the plot when it is clicked on.  You can click on the plot name to change it_
+![ScreenShot](src/images/plot-expanded.png)
