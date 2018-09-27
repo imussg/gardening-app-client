@@ -27,3 +27,6 @@ _**The expanded view of the plot when it is clicked on.  You can click on the pl
 
 _**When you click on a vegetable widget, a modal will pop up that allows you to edit the vegetable**_
 ![ScreenShot](src/images/edit-veggie.png)
+
+###### The github for the server is [here](https://github.com/imussg/gardening-app-server).
+###### The server is structured via its folders with the models structuring the garden, plot, and veggie objects for mongoose
