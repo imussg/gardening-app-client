@@ -24,3 +24,6 @@ _**When you click on a plot widget you will see an expanded view**_
 
 _**The expanded view of the plot when it is clicked on.  You can click on the plot name to change it**_
 ![ScreenShot](src/images/plot-expanded.png)
+
+_**When you click on a vegetable widget, a modal will pop up that allows you to edit the vegetable**_
+![ScreenShot](src/images/edit-veggie.png)
