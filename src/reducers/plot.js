@@ -4,6 +4,7 @@ import {
 	EDIT_PLOT_REQUEST,
 	EDIT_PLOT_SUCCESS,
 	NEW_PLOT,
+	CANCEL_NEW_PLOT,
 	CREATE_PLOT_SUCCESS,
 	CREATE_PLOT_ERROR,
 	CLICKED
@@ -40,6 +41,10 @@ export default function plotReducer(state=initialState, action) {
 			isnew: true,
 			isedit: false,
 			focus: null
+		});
+	} else if(action.type === CANCEL_NEW_PLOT) {
+		return Object.assign({}, state, {
+			isnew: false
 		});
 	} else if(action.type === CREATE_PLOT_SUCCESS) {
 		return Object.assign({}, state, {

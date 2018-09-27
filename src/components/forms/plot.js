@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 
-import { createPlot, sendEditPlot, editPlot, clicked } from '../../actions/plot';
+import { createPlot, sendEditPlot, cancelNewPlot, clicked } from '../../actions/plot';
 
 export class PlotForm extends React.Component {
 
@@ -27,7 +27,7 @@ export class PlotForm extends React.Component {
 	}1
 
 	onCancel(event) {
-		this.props.dispatch(editPlot());
+		this.props.dispatch(cancelNewPlot());
 	}
 
 	firstClick() {

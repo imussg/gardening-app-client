@@ -91,6 +91,11 @@ export const newPlot = () => ({
 	type: NEW_PLOT
 });
 
+export const CANCEL_NEW_PLOT = 'CANCEL_NEW_PLOT';
+export const cancelNewPlot = () => ({
+	type: CANCEL_NEW_PLOT
+});
+
 export const CLICKED = 'CLICKED';
 export const clicked = () => ({
 	type: CLICKED

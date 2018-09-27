@@ -167,6 +167,10 @@ button#add-new-garden {
   margin-top: 10px;
 }
 
+.plot-thumbnail {
+  margin-top: 10px;
+}
+
 input#plot-name {
   margin: 0px;
   float: center;

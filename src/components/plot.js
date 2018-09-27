@@ -9,7 +9,6 @@ export class Plot extends React.Component {
 
 	onVeggieClick(id) {
 		// console.log(this.props);
-		console.log(id);
 		this.props.onVeggieClick(id);
 	}
 
@@ -36,7 +35,7 @@ export class Plot extends React.Component {
 		// 	alt: thumbVeggie.pictureAlt
 		// };
 
-		return (<div className="col-3" id={this.props.plot.id} onClick={event=>this.props.onPlotClick(event.currentTarget.getAttribute("id"))}>
+		return (<div className="col-3 plot-thumbnail" id={this.props.plot.id} onClick={event=>this.props.onPlotClick(event.currentTarget.getAttribute("id"))}>
 			<img src={thumbPic.url} alt={thumbPic.alt} />
 			<figcaption>
 				<p className="caption-name">{this.props.plot.name}</p>
