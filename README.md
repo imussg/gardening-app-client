@@ -8,9 +8,8 @@
   <dd>Backend database link. Mongo structured the database, mongoose allowed it to interact with node, and express helped to simplify the code</dd>
   <dt>React/Redux</dt>
   <dd>React and redux allowed for a dynamic web page that doesn't have to reload and that integrates with the backend</dd>
- </dl>
+</dl>
+ 
 ---
-
-
 
 ![ScreenShot](src/images/first-screen.png)
