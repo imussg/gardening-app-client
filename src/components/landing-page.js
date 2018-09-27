@@ -25,6 +25,7 @@ export class LandingPage extends React.Component {
 				<div className="row">
 					<div className="col-12">
 						<h1>Gardening App</h1>
+						<p><sub>An app to organize your plots and track your veggies</sub></p>
 					</div>
 					<div className="col-12 garden-container" onClick={() => this.applyPlotClick()}>
 						<GardensearchForm />
