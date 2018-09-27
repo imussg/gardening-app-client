@@ -10,4 +10,4 @@
   <dd>React and redux allowed for a dynamic web page that doesn't have to reload and that integrates with the backend</dd>
  </dl>
 ---
-![ScreenShot](src/first-screen.png)
+![ScreenShot](src/images/first-screen.png)
