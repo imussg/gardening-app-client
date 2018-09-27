@@ -1,4 +1,5 @@
-## __Gardening App__ [Live site](https://gardening-client.herokuapp.com/)
+## __Gardening App__ 
+#### [Live site](https://gardening-client.herokuapp.com/)
 
 
 ### Tech Stack:
