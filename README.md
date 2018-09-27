@@ -13,14 +13,14 @@
  
 ---
 
-_The screen when you arrive_
+_**The screen when you arrive**_
 ![ScreenShot](src/images/first-screen.png)
 
-_Either create a new garden, or use "Imus Garden" to see a filled out garden_
+_**Either create a new garden, or use "Imus Garden" to see a filled out garden**_
 ![ScreenShot](src/images/first-screen-garden.png)
 
-_When you click on a plot widget you will see an expanded view_
+_**When you click on a plot widget you will see an expanded view**_
 ![ScreenShot](src/images/garden-expanded.png)
 
-_The expanded view of the plot when it is clicked on.  You can click on the plot name to change it_
+_**The expanded view of the plot when it is clicked on.  You can click on the plot name to change it**_
 ![ScreenShot](src/images/plot-expanded.png)
