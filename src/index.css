@@ -298,6 +298,12 @@ input#plot-name {
     text-decoration: none;
     cursor: pointer;
 }
+span.veggie-delete:hover,
+span.veggie-delete:focus {
+  color: red;
+  background-color: white;
+  border: 1px solid red;
+}
 .veggie-input {
   text-align: right;
   width: 100%;
@@ -397,4 +403,7 @@ button#next-button {
 }
 button.new-plot-button {
   margin-bottom: 15px;
+}
+span.veggie-delete {
+  z-index: 2;
 }

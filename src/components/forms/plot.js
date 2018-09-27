@@ -55,7 +55,7 @@ export class PlotForm extends React.Component {
 				</form>
 			);
 		} else {
-			return (<form className="new-plot" onSubmit={(event) => this.onSubmit(event)} >
+			return (<form className="new-plot" onSubmit={(event) => this.onEditSubmit(event)} >
 				<div className="edit-veggie-form-elements row">
 					<div className="col-4 veggie-input">
 						<label htmlFor="plot-name" className="plot-name-label">

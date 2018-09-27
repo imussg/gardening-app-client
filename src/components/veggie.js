@@ -40,7 +40,7 @@ export class Veggie extends React.Component {
 	// }
 
 	deleteVeggie() {
-		this.props.dispatch(deleteVeggie(this.props.veggie.id));
+		this.props.dispatch(deleteVeggie(this.props.veggie));
 	}
 
 	render() {
@@ -48,8 +48,8 @@ export class Veggie extends React.Component {
 			return this.newVeggieOption();
 		}
 		return (<div className="col-3" id={this.props.veggie.id} key={this.props.veggie.id} >
-			<div className="row veggie-picture" id={this.props.veggie.name} onClick={()=>this.onVeggieClick()} >
-				<img className="veggie-img" src={this.props.veggie.pictureUrl} alt={this.props.veggie.pictureAlt} />
+			<div className="row veggie-picture" id={this.props.veggie.name}>
+				<img className="veggie-img" src={this.props.veggie.pictureUrl} alt={this.props.veggie.pictureAlt} onClick={()=>this.onVeggieClick()}/>
 				<span className="close veggie-delete" onClick={() => this.deleteVeggie()}>&times;</span>
 			</div>
 			<div className="veggie-info-container">

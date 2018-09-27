@@ -6,8 +6,9 @@ import Plot from './plot';
 import PlotForm from './forms/plot';
 import VeggieForm from './forms/veggie';
 
+import { deleteGarden } from '../actions/garden';
 import { focusVeggie, unfocusVeggie, createVeggie } from '../actions/veggie';
-import { focusPlot, editPlot } from '../actions/plot';
+import { focusPlot, editPlot, deletePlot, newPlot } from '../actions/plot';
 
 export class Garden extends React.Component {
 
@@ -27,8 +28,21 @@ export class Garden extends React.Component {
 		this.props.dispatch(editPlot(this.props.plot));
 	}
 
+	removePlot() {
+		this.props.dispatch(deletePlot(this.props.plot));
+	}
+
 	newVeggie() {
 		this.props.dispatch(createVeggie());
+	}
+
+	newPlot() {
+		this.props.dispatch(newPlot());
+		// console.log(this.props);
+	}
+
+	deleteGarden() {
+		this.props.dispatch(deleteGarden(this.props.garden.id));
 	}
 
 	render() {
@@ -39,7 +53,7 @@ export class Garden extends React.Component {
 		if(this.props.error) {
 			return <strong>{this.props.error}</strong>;
 		}
-		const plots = this.props.garden.plots ? this.props.garden.plots.map(plot => {
+		const plots = this.props.garden && this.props.garden.plots ? this.props.garden.plots.map(plot => {
 			if(plot) {
 				return (<Plot
 					plot={plot} 
@@ -58,20 +72,47 @@ export class Garden extends React.Component {
 					? this.generatePlot(this.props.plot)
 					: '');
 		let editVeggieJsx = this.generateVeggieModal();
+		let editPlotJsx = this.generatePlotModal();
 		// let newPlotJsx = this.generatePlotModal();
-
-		return (<div className="garden-plots">
-			<div className="row plots">{plots}</div>
-			{this.getFocusedPlotTitleJsx()}
-			<div className="row focused-plot-veggies">
-				{focusedPlotJsx}
-				{editVeggieJsx}
+		/*
+		<div className="col-12">
+			<h1>{this.props.garden ? this.props.garden.name : "Gardening App"}</h1>
+			<div className="new-plot">
+				<button onClick={()=>this.deleteGarden()} className="delete-garden-button" type="button">Delete Garden</button>
+				<button onClick={()=>this.newPlot()} className="new-plot-button" type="button">Add New Plot</button>
 			</div>
-		</div>);
+		</div>
+		<div className="col-12 garden-container">
+			<Garden />
+		</div>
+		*/
+		return (<React.Fragment>
+			<div className="col-12">
+				<h1>{this.props.garden ? this.props.garden.name : "Gardening App"}</h1>
+				<div className="new-plot">
+					<button onClick={()=>this.deleteGarden()} className="delete-garden-button" type="button">Delete Garden</button>
+					<button onClick={()=>this.newPlot()} className="new-plot-button" type="button">Add New Plot</button>
+				</div>
+			</div>
+			<div className="col-12 garden-container">
+				<div className="garden-plots">
+					<div className="row plots">{plots}</div>
+					{this.getFocusedPlotTitleJsx()}
+					<div className="row focused-plot-veggies">
+						{focusedPlotJsx}
+						{editVeggieJsx}
+						{editPlotJsx}
+					</div>
+				</div>
+			</div>
+		</React.Fragment>);
 	}
 	// sees if "editPlot" is true, makes title a form if so, displays it as a "h1" if false
 	getFocusedPlotTitleJsx() {
-		let instructions = this.props.plotClicked ? "" : "Click on the plot name to change it";
+		let instructions = <p className="plot-instructions">{"Click on the plot name to change it"}</p>;
+		if(this.props.plotClicked) {
+			instructions = <button type="button" className="delete-garden-button" onClick={() => this.removePlot()}>Delete Plot</button>;
+		}
 		if(this.props.plot) {	
 			if(this.props.editPlot) {
 				return (<div className="row focused-plot-title">
@@ -80,7 +121,7 @@ export class Garden extends React.Component {
 			}
 			return (<div className="row focused-plot-title" onClick={(event)=>this.editPlot(event.currentTarget)}>
 				<div className="col-4 new-plot">
-					<p className="plot-instructions">{instructions}</p>
+					{instructions}
 				</div>
 				<div className="col-4 focused-plot-title">
 					{this.props.plot.name}

@@ -69,10 +69,7 @@ export const setPossibleVeggies = (veggies) => ({
 
 export const deleteVeggie = (veggie) => dispatch => {
 	return fetch(`${BASE_URL}/api/veggies/${veggie.id}`, {
-		method: 'DELETE',
-		headers: {
-			"Content-Type": "application/json"
-		}
+		method: 'DELETE'
 	})
 	.then(res => {
 		if(res.ok) {

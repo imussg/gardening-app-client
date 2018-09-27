@@ -1,4 +1,4 @@
-import { submitGarden } from './garden';
+import { submitGarden, fetchGarden } from './garden';
 
 const BASE_URL = 'https://gardening-server.herokuapp.com';
 
@@ -16,7 +16,7 @@ export const createPlot = (plot) => dispatch => {
 	.then(garden => dispatch(submitGarden(garden)))
 	.then(() => dispatch(createPlotSuccess(null)))
 	.catch(err => dispatch(createPlotError(err)));
-}
+};
 export const sendEditPlot = (plot) => dispatch => {
 	// console.log(plot);
 	dispatch(editPlotRequest());
@@ -40,8 +40,18 @@ export const sendEditPlot = (plot) => dispatch => {
 		}
 	})
 	.catch(err => dispatch(createPlotError(err)));
-}
-
+};
+export const deletePlot = (plot) => dispatch => {
+	dispatch(editPlotSuccess(null));
+	return fetch(`${BASE_URL}/api/plots/${plot.id}`, {method: 'DELETE'})
+	.then(res => {
+		if(res.ok) {
+			return dispatch(fetchGarden(plot.gardenId));
+		} else {
+			return Promise.reject("deleting veggie unsuccessful");
+		}
+	})
+};
 export const EDIT_PLOT_REQUEST = 'EDIT_PLOT_REQUEST';
 export const editPlotRequest = () => ({
 	type: EDIT_PLOT_REQUEST
