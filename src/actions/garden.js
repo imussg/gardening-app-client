@@ -12,11 +12,16 @@ export const createGarden = (garden) => dispatch => {
 		},
 		body: JSON.stringify(garden)
 	})
-	.then(res => {
-		// console.log(res);
-		res.json();
+	.then(res => res.json())
+	// .then(res => {
+	// 	console.log(res);
+	// 	fetch(`${BASE_URL}/api/gardens/`);
+	// 	return res;
+	// })
+	.then(garden => {
+		console.log(garden);
+		return dispatch(fetchPlotsSuccess(garden));
 	})
-	.then(garden => dispatch(fetchPlotsSuccess(garden)))
 	.then(() => dispatch(getAllVeggies()))
 	.catch(err => dispatch(fetchPlotsError(err)));
 }
