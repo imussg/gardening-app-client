@@ -1,12 +1,8 @@
-/*body {
-  font-family: "source-sans-pro","Lato",sans-serif;
-  font-size: 0;
-}*/
-
 body {
   margin: 10;
   padding: 0;
   font-family: sans-serif;
+  background-color: #e8ffe8;
 }
 
 * {
@@ -37,27 +33,21 @@ body {
 
 .col-3, .col-4, .col-6, .col-12 {
   float: left;
-
-  /* Gutters:
-   * Each column is padded by half-a-gutter on each side,
-   *
-   * Half a gutter is 10px, 10/960 (context) = 1.041666%
-   *
-   */
   padding-left: 1.04166666%;
   padding-right: 1.04166666%;
 }
 
 #root {
-  background-image: url("./garden-bg.jpg");
+  /*background-image: url("./garden-bg.jpg");*/
   height: 100%;
   z-index: -1;
 }
 
 #root > .row {
   z-index:1;
-  background-color: #d0ffd0;
   border: 1px solid green;
+  border-radius: 5px;
+  background-color: #c0e9c0;
 }
 
 form.garden-name-form {
@@ -264,31 +254,27 @@ input#plot-name {
   }
 }
 
-/* The Modal (background) */
 .modal {
-    display: block; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    /*min-height: 150px;*/
+    display: block;
+    position: fixed;
+    z-index: 3;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
 
-/* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%;
 }
 
-/* The Close Button */
 .close {
     color: #aaa;
     float: right;
