@@ -119,11 +119,11 @@ export class Garden extends React.Component {
 					<PlotForm />
 				</div>);
 			}
-			return (<div className="row focused-plot-title" onClick={(event)=>this.editPlot(event.currentTarget)}>
+			return (<div className="row focused-plot-title">
 				<div className="col-4 new-plot">
 					{instructions}
 				</div>
-				<div className="col-4 focused-plot-title">
+				<div className="col-4 focused-plot-title" onClick={(event)=>this.editPlot(event.currentTarget)}>
 					{this.props.plot.name}
 				</div>
 				<div className="col-4 edit-plot">

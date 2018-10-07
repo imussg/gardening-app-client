@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 
 import { sendEditVeggie, sendNewVeggie, unfocusVeggie, getAllVeggies } from '../../actions/veggie';
+import { fetchGarden } from '../../actions/garden';
 
 // import Veggie from '../veggie';
 
@@ -28,7 +29,10 @@ export class VeggieForm extends React.Component {
 		editedVeggie["pictureUrl"] = veggiePictureUrl;
 		editedVeggie["pictureAlt"] = veggiePictureAlt;
 		if(this.props.editVeggie) {
-			this.props.dispatch(sendEditVeggie(editedVeggie));
+			Promise.all([
+				this.props.dispatch(sendEditVeggie(editedVeggie)),
+				this.props.dispatch(fetchGarden(this.props.plotFocus.gardenId))
+			]);
 		} else {
 			this.props.dispatch(sendNewVeggie(editedVeggie));
 			// this.props.dispatch(getAllVeggies());
