@@ -1,7 +1,8 @@
 body {
   margin: 10;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Open Sans';
+  font-weight: 400;
   background-color: #e8ffe8;
 }
 
@@ -11,6 +12,7 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 .row {
   max-width: 1000px;
   padding-left: 20px;
@@ -20,7 +22,6 @@ body {
   text-align: center;
 }
 
-/* Clearfix */
 .row::before,
 .row::after {
   display: table;
@@ -45,9 +46,22 @@ body {
 
 #root > .row {
   z-index:1;
-  border: 1px solid green;
   border-radius: 5px;
   background-color: #c0e9c0;
+}
+
+div.col-12 > h1 {
+  font-size: 3em;
+}
+
+div.col-12 p.plot-instructions {
+  color: black;
+  font-size: 1.2em;
+}
+
+div.col-12 p.error-text {
+  color: red;
+  font-size: 1.2em;
 }
 
 form.garden-name-form {

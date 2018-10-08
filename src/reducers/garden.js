@@ -14,7 +14,7 @@ const initialState = {
 	garden: {
 		plots: []
 	},
-	error: ""
+	error: null
 }
 
 export default function gardenReducer(state=initialState, action) {
@@ -36,7 +36,7 @@ export default function gardenReducer(state=initialState, action) {
 			error: action.err,
 			hasSubmittedGarden: false,
 			gardenName: "",
-			garden: {}
+			garden: initialState.garden
 		});
 	} else if(action.type === FETCH_PLOTS_REQUEST) {
 		return Object.assign({}, state, {

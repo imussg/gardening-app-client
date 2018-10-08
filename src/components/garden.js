@@ -88,7 +88,7 @@ export class Garden extends React.Component {
 		*/
 		return (<React.Fragment>
 			<div className="col-12">
-				<h1>{this.props.garden ? this.props.garden.name : "Gardening App"}</h1>
+				<h1>{this.props.garden ? this.props.garden.name : "Plotify"}</h1>
 				<div className="new-plot">
 					<button onClick={()=>this.deleteGarden()} className="delete-garden-button" type="button">Delete Garden</button>
 					<button onClick={()=>this.newPlot()} className="new-plot-button" type="button">Add New Plot</button>

@@ -49,8 +49,9 @@ export const findGarden = (name) => dispatch => {
 				// console.log(foundGarden[0]);
 				dispatch(fetchPlotsSuccess(foundGarden[0]));
 				// dispatch(toggleGardenBoolean());
+			} else {
+				dispatch(gardenNameError(new Error("Garden Not Found")));
 			}
-
 		})
 		.catch(err => dispatch(gardenNameError(err)));
 }
