@@ -57,14 +57,6 @@ export class VeggieForm extends React.Component {
 			condition = this.props.veggieFocus.condition;
 			pictureUrl = this.props.veggieFocus.pictureUrl;
 		}
-		// console.log(this.props);
-		// let currentVeg = "";
-		// if(this.props.editVeggie && this.props.veggieFocus && this.props.possibleVeggies) {
-		// 	currentVeg = this.props.possibleVeggies.filter(veg => this.props.veggieFocus.id === veg.id)[0];
-		// 	currentVeg = <Veggie veggie={currentVeg} key={currentVeg.id} isNew={false}/>
-		// } else {
-		// 	currentVeg = this.props.possibleVeggies ? <Veggie veggie={this.props.possibleVeggies[this.props.index]} key={this.props.possibleVeggies[this.props.index].id} isNew={true}/> : "";
-		// }
 		return (
 			<div className="veggie-container-div">
 				<div className="veggie-form">

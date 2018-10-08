@@ -8,6 +8,15 @@ export class GardensearchForm extends React.Component {
 
 	componentDidMount() {
 		this.gardenName.focus();
+		this.gardenName.select();
+	}
+
+	componentDidUpdate() {
+		if(this.props.error) {
+			console.log("error's shown up");
+			this.gardenName.focus();
+			this.gardenName.select();
+		}
 	}
 
 	onSubmit(event) {
@@ -25,17 +34,6 @@ export class GardensearchForm extends React.Component {
 	}
 
 	render() {
-
-		// let successMessage;
-        // let errorMessage = this.props.error ? (<div className="garden-error">
-        // 	{this.props.error}
-        // </div>) : '';
-        // if(!this.props.error && this.props.garden) {
-        // 	successMessage = (<div className="garden-success">
-        // 		{"Garden successfully loaded"}
-        // 	</div>);
-        // }
-
         return (
 			<form className="garden-name-form" onSubmit={event => this.onSubmit(event)}>
 	            <label htmlFor="garden-name">Username</label>
