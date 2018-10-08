@@ -24,8 +24,8 @@ export class LandingPage extends React.Component {
 			return (
 				<div className="row">
 					<div className="col-12">
-						<h1>Gardening App</h1>
-						<p><sub>An app to organize your plots and track your veggies</sub></p>
+						<h1>Plotify</h1>
+						<p><sub>A gardening app to organize your plots and track your veggies</sub></p>
 					</div>
 					<div className="col-12 garden-container" onClick={() => this.applyPlotClick()}>
 						<GardensearchForm />
@@ -36,22 +36,7 @@ export class LandingPage extends React.Component {
 			return (<div className="row" onClick={() => this.applyPlotClick()}>
 				<Garden />
 			</div>);
-			// return (
-			// 	<div className="row">
-			// 		<div className="col-12">
-			// 			<h1>{this.props.garden ? this.props.garden.name : "Gardening App"}</h1>
-			// 			<div className="new-plot">
-			// 				<button onClick={()=>this.deleteGarden()} className="delete-garden-button" type="button">Delete Garden</button>
-			// 				<button onClick={()=>this.newPlot()} className="new-plot-button" type="button">Add New Plot</button>
-			// 			</div>
-			// 		</div>
-			// 		<div className="col-12 garden-container">
-			// 			<Garden />
-			// 		</div>
-			//     </div>
-			// );
 		}
-		// return <Garden id={this.props.}
 	}
 }
 
