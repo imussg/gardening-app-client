@@ -136,7 +136,6 @@ export class Garden extends React.Component {
 
 	generateVeggieModal() {
 		if(this.props.editVeggie || this.props.newVeggie) {
-			// console.log("in generating veggie edit modal");
 			return (<div className="modal">
 				<div className="modal-content">
 					<span className="close" onClick={() => this.removeVeggieFocus()}>&times;</span>
