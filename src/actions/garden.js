@@ -12,14 +12,14 @@ export const createGarden = (garden) => dispatch => {
 		},
 		body: JSON.stringify(garden)
 	})
-	.then(res => res.json())
-	// .then(res => {
-	// 	console.log(res);
-	// 	fetch(`${BASE_URL}/api/gardens/`);
-	// 	return res;
-	// })
+	.then(res => {
+		if(res.ok) {
+			return res.json();
+		} else {
+			return Promise.reject(new Error(`Create Garden unsuccessful`));
+		}
+	})
 	.then(garden => {
-		console.log(garden);
 		return dispatch(fetchPlotsSuccess(garden));
 	})
 	.then(() => dispatch(getAllVeggies()))

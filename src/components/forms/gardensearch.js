@@ -37,7 +37,7 @@ export class GardensearchForm extends React.Component {
         return (
 			<form className="garden-name-form" onSubmit={event => this.onSubmit(event)}>
 	            <label htmlFor="garden-name">Username</label>
-	            <input type="text" ref={input => this.gardenName = input} id="garden-name" placeholder="Please enter your username"/>
+	            <input type="text" ref={input => this.gardenName = input} id="garden-name" placeholder="Enter your username"/>
 	            <div className="action-buttons row">
 		            <button
 		            	className="blue"

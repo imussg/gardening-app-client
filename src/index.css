@@ -268,6 +268,19 @@ input#plot-name {
   }
 }
 
+@media only screen and (max-width: 639px) {
+  label.plot-name-label, input#plot-name {
+    display: block;
+  }
+  input#plot-name {
+    min-width: 100%;
+    float: left;
+  }
+  label.veggie-label input#veggie-name {
+    display: block;
+  }
+}
+
 .modal {
     display: block;
     position: fixed;
